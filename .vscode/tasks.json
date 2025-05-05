@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Abrir en localhost",
+        "type": "shell",
+        "command": "start http://localhost/${workspaceFolderBasename}/${relativeFile}",
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
+  

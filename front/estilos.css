@@ -1,0 +1,92 @@
+/* ESTILO PROVISIONAL PARA CUANDO HAGA PRUEBAS NO ME SANGREN LOS OJOS */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Encabezados */
+h1, h2, h3 {
+    color: #0056b3;
+    text-align: center;
+}
+
+/* Enlaces */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botones */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Contenedores */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout para menu y form */
+.layout {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.menu {
+    width: 25%;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+    width: 75%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.icono {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+}
+
+.link.active {
+    color: white;
+    background-color: #2d8cff;
+    border-radius: 5px;
+    pointer-events: none; /* Opcional: desactiva el link si ya estás en esa página */
+}
+

@@ -5,14 +5,14 @@ USE bd_veterinaria;
 create table animal (
     id_animal int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_animal varchar(15) NOT NULL,
-    edad_animal int(2),
+    edad_animal date NULL,
     color_animal varchar(30) NOT NULL,
     tamano_animal decimal(6, 2) NULL,
     peso_animal decimal(6, 2) NULL,
-    dni_dueno char(9),
-    id_especie int,
-    id_raza int,
-    dni_veterinario char(9)
+    dni_dueno char(9) NOT NULL,
+    id_especie int NOT NULL,
+    id_raza int NOT NULL,
+    dni_veterinario char(9) NOT NULL
 );
 
 create table dueno (
@@ -29,7 +29,7 @@ create table especie (
     id_especie int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_especie varchar(25) NOT NULL,
     nombre_cientifico_especie varchar(40) NOT NULL,
-    clasif_especie enum('mamifero','pez','invertevrado','ave','reptil','amfibio') NOT NULL
+    clasif_especie enum('mamifero','pez','invertebrado','ave','reptil','amfibio') NOT NULL
 );
 
 create table raza (
@@ -40,7 +40,7 @@ create table raza (
 
 create table historial_medico (
     id_historial int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    sexo_animal_historial enum("macho","hembra","hemafrodita") NOT NULL,
+    sexo_animal_historial enum("macho","hembra","hermafrodita") NOT NULL,
     fecha_nac_historial DATE NOT NULL,
     microchip_historial char(30) NULL,
     vacunas_historial varchar(100) NULL,

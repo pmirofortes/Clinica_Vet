@@ -1,9 +1,6 @@
 <?php
-session_start();
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: ./vistas/login.php");
-//     exit();
-// }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +42,7 @@ session_start();
                 <th>Edad</th>
                 <th>Dueño</th>
                 <th>Tamaño</th>
+                <th>Acciones</th>
             </tr>
 
             <?php
@@ -70,12 +68,15 @@ session_start();
                         echo "<td>{$animal['edad_animal']}</td>";
                         echo "<td>{$animal['dni_dueno']}</td>";
                         echo "<td>{$animal['tamano_animal']}</td>";
+                        echo "boton";
                         echo "</tr>";
 
                     }
 
                 } else {
-            
+                    echo "<tr>";
+                    echo "<td colspan='6'>No hay animales registrados</td>";
+                    echo "</tr>";
 
                     ?>
 

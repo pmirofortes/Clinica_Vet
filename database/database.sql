@@ -7,7 +7,6 @@ create table animal (
     nombre_animal varchar(15) NOT NULL,
     edad_animal date NULL,
     color_animal varchar(30) NOT NULL,
-    tamano_animal decimal(6, 2) NULL,
     peso_animal decimal(6, 2) NULL,
     dni_dueno char(9) NOT NULL,
     id_especie int NOT NULL,
@@ -32,10 +31,11 @@ create table especie (
     clasif_especie enum('mamifero','pez','invertebrado','ave','reptil','amfibio') NOT NULL
 );
 
+
 create table raza (
     id_raza int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_raza varchar(25) NOT NULL,
-    id_noDefinida int
+    id_especie int NOT NULL
 );
 
 create table historial_medico (
@@ -48,10 +48,6 @@ create table historial_medico (
     id_animal int  
 );
 
-create table sinDefinir (
-    id_noDefinido int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nombre_noDefinido varchar(45) NOT NULL
-);
 
 create table veterinario (
     dni_veterinario char(9) PRIMARY KEY NOT NULL,
@@ -80,8 +76,8 @@ ADD CONSTRAINT idHistorial_idAnimal
 FOREIGN KEY (id_animal) REFERENCES animal(id_animal);
 
 alter table raza
-ADD CONSTRAINT idRaza_idNoDefinido
-FOREIGN KEY (id_noDefinida) REFERENCES sinDefinir(id_noDefinida);
+ADD CONSTRAINT idRaza_idespecie
+FOREIGN KEY (id_especie) REFERENCES especie(id_especie);
 
 alter table animal
 ADD CONSTRAINT idAnimal_dniVeterinario

@@ -12,7 +12,7 @@ $mail = $_POST['mail'];
 
 if (isset($nombre) && isset($apellidos) && isset($DNI) && isset($fecha) && isset($telefono) && isset($localidad) && isset($mail)) {
     // COMPROBAR QUE NO EXISTE EL PROPIETARIO
-    $sql = "SELECT * FROM dueno WHERE dni_dueno = '?'";
+    $sql = "SELECT * FROM dueno WHERE dni_dueno = '$DNI'";
     $resultado = mysqli_query($conn, $sql);
     if (mysqli_num_rows($resultado) > 0) {
         echo "<script>alert('El propietario ya existe');</script>";

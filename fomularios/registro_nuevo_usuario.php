@@ -14,10 +14,12 @@
     </header>
     <div class="layout">
         <section class="menu">
-            <li><a href="../index.php" class="link"><img src="../media/lupa.png" class= "icono">Consultar mascotas</a></li>
+            <li><a href="../index.php" class="link">Consultar mascotas</a></li>
             <li><a href="../fomularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a></li>
             <li><a href="../fomularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a></li>
-            <li><a href="../fomularios/registro_nuevo_usuario.php" class="link active"><img src="../media/veterinario.png" class="icono">Dar de alta veterinario</a></li>
+            <li><a href="../fomularios/registro_nuevo_usuario.php" class="link active">Dar de alta veterinario</a></li>
+            <li><a href="../fomularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+            <li><a href="../fomularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
         </section>
         <section class="form">
             <form action="../procesos/create/create_veterinario.php" method="post">

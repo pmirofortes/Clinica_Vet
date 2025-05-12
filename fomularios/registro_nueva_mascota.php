@@ -1,136 +1,163 @@
-<!-- <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+<?php
+session_start();
+include_once '../servicios/conexion.php';
 
-// resto del código...
-?> -->
+$mensajeDueño = "";
+$mensajeVet = "";
+$claseInputDueño = "";
+$claseInputVet = "";
+
+if (!isset($_SESSION['dni_dueno_valido'])) $_SESSION['dni_dueno_valido'] = false;
+if (!isset($_SESSION['dni_vet_valido'])) $_SESSION['dni_vet_valido'] = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Buscar DNI dueño
+    if (isset($_POST['buscar_dni_dueño'])) {
+        $dni_dueño = mysqli_real_escape_string($conn, $_POST['dni_dueño']);
+        $_SESSION['dni_dueño'] = $dni_dueño;
+
+        $sql = "SELECT nombre_dueno, apellidos_dueno FROM dueno WHERE dni_dueno = '$dni_dueño'";
+        $resultado = mysqli_query($conn, $sql);
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $mensajeDueño = "Dueño encontrado: " . $row['nombre_dueno'] . " " . $row['apellidos_dueno'];
+            $claseInputDueño = "input-verde";
+            $_SESSION['dni_dueno_valido'] = true;
+        } else {
+            $mensajeDueño = "No se encontró ningún dueño con ese DNI.";
+            $claseInputDueño = "input-rojo";
+            $_SESSION['dni_dueno_valido'] = false;
+        }
+    }
+
+    // Buscar DNI veterinario
+    if (isset($_POST['buscar_dni_vet'])) {
+        $dni_vet = mysqli_real_escape_string($conn, $_POST['dni_vet']);
+        $_SESSION['dni_vet'] = $dni_vet;
+
+        $sql = "SELECT nombre_veterinario, apellidos_veterinario FROM veterinario WHERE dni_veterinario = '$dni_vet'";
+        $resultado = mysqli_query($conn, $sql);
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $mensajeVet = "Veterinario encontrado: " . $row['nombre_veterinario'] . " " . $row['apellidos_veterinario'];
+            $claseInputVet = "input-verde";
+            $_SESSION['dni_vet_valido'] = true;
+        } else {
+            $mensajeVet = "No se encontró ningún veterinario con ese DNI.";
+            $claseInputVet = "input-rojo";
+            $_SESSION['dni_vet_valido'] = false;
+        }
+    }
+
+    // Registrar mascota
+    if (isset($_POST['registrar_mascota']) && $_SESSION['dni_dueno_valido'] && $_SESSION['dni_vet_valido']) {
+        $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
+        $edad = mysqli_real_escape_string($conn, $_POST['edad']);
+        $peso = mysqli_real_escape_string($conn, $_POST['peso']);
+        $color = mysqli_real_escape_string($conn, $_POST['color']);
+        $especie = $_POST['especie'];
+        $raza = $_POST['raza'];
+
+        $sql = "INSERT INTO mascota (nombre_mascota, fecha_nacimiento, peso, color, id_especie, id_raza, dni_dueno, dni_veterinario)
+                VALUES ('$nombre', '$edad', '$peso', '$color', '$especie', '$raza', '{$_SESSION['dni_dueño']}', '{$_SESSION['dni_vet']}')";
+        
+        if (mysqli_query($conn, $sql)) {
+            echo "<script>alert('Mascota registrada correctamente.');</script>";
+            $_SESSION['dni_dueno_valido'] = false;
+            $_SESSION['dni_vet_valido'] = false;
+            $_SESSION['dni_dueño'] = "";
+            $_SESSION['dni_vet'] = "";
+        } else {
+            echo "<script>alert('Error al registrar mascota.');</script>";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de mascota</title>
+    <title>Registro de Mascota</title>
     <link rel="stylesheet" href="../front/estilos.css">
     <style>
-        /* Estilos para los campos de texto */
-        .input-verde {
-            border: 2px solid green;
-        }
-
-        .input-rojo {
-            border: 2px solid red;
-        }
-
-        .mensaje {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .mensaje-verde {
-            color: green;
-        }
-
-        .mensaje-rojo {
-            color: red;
-        }
+        .input-verde { border: 2px solid green; }
+        .input-rojo { border: 2px solid red; }
+        .mensaje { font-weight: bold; margin-top: 10px; }
+        .mensaje-verde { color: green; }
+        .mensaje-rojo { color: red; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Registro de Mascota</h1>
-    </header>
-    <div class="layout">
-        <section class="menu">
-            <li><a href="../index.php" class="link"><img src="../media/lupa.png" class= "icono">Consultar mascotas</a></li>
-            <li><a href="../fomularios/registro_nueva_mascota.php" class="link active">Dar de alta mascota</a></li>
-            <li><a href="../fomularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a></li>
-            <li><a href="../fomularios/registro_nuevo_usuario.php" class="link"><img src="../media/veterinario.png" class="icono">Dar de alta veterinario</a></li>
-        </section>
+<header><h1>Registro de Mascota</h1></header>
+<div class="layout">
+<section class="menu">
+    <li><a href="../index.php" class="link">Consultar mascotas</a></li>
+    <li><a href="registro_nueva_mascota.php" class="link active">Dar de alta mascota</a></li>
+    <li><a href="registro_nuevo_propietario.php" class="link">Dar de alta propietario</a></li>
+    <li><a href="registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a></li>
+    <li><a href="registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+    <li><a href="registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+</section>
 
-        <?php
-        include_once '../servicios/conexion.php';
+<section class="form">
+    <form method="post" action="">
+        <label>Nombre:</label><br>
+        <input type="text" name="nombre" value="<?= htmlspecialchars($_POST['nombre'] ?? '') ?>"><br><br>
 
-        $mensaje = "";
-        $claseInput = "";
-        $dniValido = false; // Variable para controlar si el DNI es válido
+        <label>Fecha nacimiento:</label><br>
+        <input type="date" name="edad" value="<?= htmlspecialchars($_POST['edad'] ?? '') ?>"><br><br>
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buscar_dni'])) {
-            $dni = mysqli_real_escape_string($conn, $_POST['dueño']);
-            $sql = "SELECT nombre_dueno, apellidos_dueno FROM dueno WHERE dni_dueno = '$dni'";
-            $resultado = mysqli_query($conn, $sql);
+        <label>Peso:</label><br>
+        <input type="number" name="peso" step="0.1" value="<?= htmlspecialchars($_POST['peso'] ?? '') ?>"> kg<br><br>
 
-            if ($resultado && mysqli_num_rows($resultado) > 0) {
-                $row = mysqli_fetch_assoc($resultado);
-                $mensaje = "Dueño encontrado: " . $row['nombre_dueno'] . " " . $row['apellidos_dueno'];
-                $claseInput = "input-verde";
-                $dniValido = true; // El DNI es válido
-            } else {
-                $mensaje = "No se encontró ningún dueño con ese DNI.";
-                $claseInput = "input-rojo";
-                $dniValido = false; // El DNI no es válido
+        <label>Color:</label><br>
+        <input type="text" name="color" value="<?= htmlspecialchars($_POST['color'] ?? '') ?>"><br><br>
+
+        <label>DNI Dueño:</label><br>
+        <input type="text" name="dni_dueño" class="<?= $claseInputDueño ?>" value="<?= htmlspecialchars($_SESSION['dni_dueño'] ?? '') ?>">
+        <button type="submit" name="buscar_dni_dueño">Buscar</button>
+        <?php if ($mensajeDueño): ?>
+            <p class="mensaje <?= $claseInputDueño === 'input-verde' ? 'mensaje-verde' : 'mensaje-rojo' ?>"><?= $mensajeDueño ?></p>
+        <?php endif; ?>
+        <br>
+
+        <label>DNI Veterinario:</label><br>
+        <input type="text" name="dni_vet" class="<?= $claseInputVet ?>" value="<?= htmlspecialchars($_SESSION['dni_vet'] ?? '') ?>">
+        <button type="submit" name="buscar_dni_vet">Buscar</button>
+        <?php if ($mensajeVet): ?>
+            <p class="mensaje <?= $claseInputVet === 'input-verde' ? 'mensaje-verde' : 'mensaje-rojo' ?>"><?= $mensajeVet ?></p>
+        <?php endif; ?>
+        <br><br>
+
+        <label>Especie:</label><br>
+        <select name="especie">
+            <option value="">Seleccionar especie</option>
+            <?php
+            $sql = "SELECT id_especie, nombre_especie FROM especie";
+            $res = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($res)) {
+                $selected = (isset($_POST['especie']) && $_POST['especie'] == $row['id_especie']) ? 'selected' : '';
+                echo "<option value='{$row['id_especie']}' $selected>{$row['nombre_especie']}</option>";
             }
-        }
-        ?>
+            ?>
+        </select><br><br>
 
-        <section class="form">
-            <!-- Formulario para buscar DNI -->
-            <form action="" method="post">
-                <label for="nombre">Nombre de la mascota:</label><br>
-                <input type="text" id="nombre" name="nombre"><br><br>
-                
-                <label for="edad">Edad:</label><br>
-                <input type="date" id="edad" name="edad"><br><br>
+        <label>Raza:</label><br>
+        <select name="raza">
+            <option value="">Seleccionar raza</option>
+            <?php
+            $sql = "SELECT id_raza, nombre_raza FROM raza";
+            $res = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($res)) {
+                $selected = (isset($_POST['raza']) && $_POST['raza'] == $row['id_raza']) ? 'selected' : '';
+                echo "<option value='{$row['id_raza']}' $selected>{$row['nombre_raza']}</option>";
+            }
+            ?>
+        </select><br><br>
 
-                <label for="peso">Peso:</label><br>
-                <input type="number" id="peso" name="peso"><br><br>
-                
-                <label for="color">Color:</label><br>
-                <input type="text" id="color" name="color"><br><br>
-
-                <label for="dueño">Dueño (DNI):</label><br>
-                <input type="text" id="dueño" name="dueño" class="<?php echo $claseInput; ?>" value='<?php echo isset($_POST["dueño"]) ? ($_POST["dueño"]) : ""; ?>'>
-                <button type="submit" name="buscar_dni">Buscar DNI</button><br><br>
-                
-                <?php if (!empty($mensaje)): ?>
-                    <p class="mensaje <?php echo $claseInput === 'input-verde' ? 'mensaje-verde' : 'mensaje-rojo'; ?>">
-                        <?php echo $mensaje; ?>
-                    </p>
-                <?php endif; ?>
-
-                <label for="especie">Especie:</label><br>
-                <select name="especie">
-                    <option value="">Seleccionar especie</option>
-                    <?php
-                    $sql = "SELECT id_especie, nombre_especie FROM especie";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='" . $row['id_especie'] . "'>" . $row['nombre_especie'] . "</option>";
-                        }
-                    } else {
-                        echo "<option value=''>Error al cargar especies</option>";
-                    }
-                    ?>
-                </select><br><br>
-
-                <label for="raza">Raza:</label><br>
-                <input type="text" id="raza" name="raza"><br><br>
-
-            </form>
-
-            <!-- Formulario para registrar mascota -->
-            <form action="../procesos/create/create_mascota.php" method="post">
-                <input type="hidden" name="nombre" value="<?php echo isset($_POST['nombre']) ? ($_POST['nombre']) : ''; ?>">
-                <input type="hidden" name="tipo" value="<?php echo isset($_POST['tipo']) ? ($_POST['tipo']) : ''; ?>">
-                <input type="hidden" name="raza" value="<?php echo isset($_POST['raza']) ? ($_POST['raza']) : ''; ?>">
-                <input type="hidden" name="edad" value="<?php echo isset($_POST['edad']) ? ($_POST['edad']) : ''; ?>">
-                <input type="hidden" name="peso" value="<?php echo isset($_POST['peso']) ? ($_POST['peso']) : ''; ?>">
-                <input type="hidden" name="color" value="<?php echo isset($_POST['color']) ? ($_POST['color']) : ''; ?>">
-                <input type="hidden" name="dueño" value="<?php echo isset($_POST['dueño']) ? ($_POST['dueño']) : ''; ?>">
-                <input type="submit" value="Registrar Mascota" <?php echo $dniValido ? '' : 'disabled'; ?>>
-            </form>
-        </section>
-    </div>
+        <input type="submit" name="registrar_mascota" value="Registrar Mascota" <?= ($_SESSION['dni_dueno_valido'] && $_SESSION['dni_vet_valido']) ? '' : 'disabled' ?>>
+    </form>
+</section>
+</div>
 </body>
 </html>

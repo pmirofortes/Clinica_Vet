@@ -22,10 +22,12 @@ ini_set('display_errors', 1);
 
     <!-- Barra de navegación para dirigirte a las demás páginas -->
     <section class="menu">
-            <a href="../index.php" class="link active"><img src="./media/lupa.png" class= "icono">Consultar mascotas</a>
-            <a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
-            <a href="./fomularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
-            <a href="./fomularios/registro_nuevo_usuario.php" class="link"><img src="./media/veterinario.png" class="icono">Dar de alta veterinario</a>
+            <li><a href="../index.php" class="link active"><img src="./media/lupa.png" class= "icono">Consultar mascotas</a>
+            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
+            <li><a href="./fomularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
+            <li><a href="./fomularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
+            <li><a href="./fomularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+            <li><a href="./fomularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
     </section>
 
     <main>

@@ -90,3 +90,154 @@ button:hover {
     pointer-events: none; /* Opcional: desactiva el link si ya estás en esa página */
 }
 
+
+
+
+
+/* Contenido de la página de bienvenida */
+.contenido_bienvenida{
+
+    width: 100%;
+
+}
+
+/* Bocadillo */
+
+.bienvenida_bocadillo{
+
+    width: 60%;
+    margin-left: 10%;
+    border: 2px solid black;
+    border-radius: 65px;
+    height: 60vh;
+    position: fixed;
+    background-color: white;
+    text-align: center;
+    margin-top: 5%;
+
+}
+
+
+/* Foto del perro */
+
+.bienvenida_perro{
+
+    position: fixed;
+    margin-left: 70%;
+    margin-top: 10%;
+
+}
+
+/* .boton_perro{
+
+    opacity: 0;
+    position: fixed;
+    margin-left: 70%;
+    margin-top: 10%;
+
+}
+
+.bienvenida_bocadillo:hover .boton_perro{
+
+    opacity: 1;
+
+} */
+
+/* El texto que aparece en el bocadillo */
+
+.bienvenida_texto{
+
+    font-size: 50px;
+    margin-top: 5%;
+
+}
+
+
+/* El título que aparece en el bocadillo */
+
+.bienvenida_titulo{
+
+    font-size: 80px;
+    color: aqua;
+
+}
+
+
+/* Contenedor del botón */
+
+.contenido_bienvenida_boton{
+
+    margin-top: 10%;
+    margin-left: 25%;
+    width: 50%;
+    font-size: 40px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.contenido_bienvenida_boton:hover{
+
+    background-color: rgba(0, 255, 255, 0.5);
+    transition: all 0.5s;
+    border: 1px solid black;
+
+}
+
+/* Figura de la animación */
+
+.contenido_bienvenida_boton:hover .palo{
+
+    position: absolute;
+    height: 230px;
+    width: 100px;
+    background-color: white;
+    margin: -15%;
+    transform: rotate(-40deg);
+    opacity: 0;
+    animation: arrow 2s infinite;
+
+}
+
+/* El botón */
+
+.bienvenida_boton{
+
+    text-decoration: none;
+    color: black;
+    height: 5vh;
+    width: 100%;
+
+
+}
+
+.entrar{
+
+    position: relative;
+    
+}
+
+
+/* Animación del botón */
+
+@keyframes arrow{
+
+    0%{
+
+        opacity: 1;
+        margin-left: -55%;
+
+
+    }
+
+
+    100%{
+
+        opacity: 1;
+        margin-left: 130%;
+
+    }
+
+} 
+

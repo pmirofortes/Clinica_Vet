@@ -1,0 +1,181 @@
+<productos>
+    <producto tipo="alimento">
+        <nombre>Comida seca para perros</nombre>
+        <precio>25.00</precio>
+        <descripcion>Alimento seco completo para perros adultos de todas las razas.</descripcion>
+        <caracteristicas>
+            <categoria>perro</categoria>
+            <categoria>seco</categoria>
+            <categoria>adulto</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Comida húmeda para gatos</nombre>
+        <precio>15.00</precio>
+        <descripcion>Alimento húmedo para gatos con pollo y atún.</descripcion>
+        <caracteristicas>
+            <categoria>gato</categoria>
+            <categoria>húmedo</categoria>
+            <categoria>adulto</categoria>
+        </caracteristicas>
+    </producto>
+        <producto tipo="alimento">
+        <nombre>Snacks para perros</nombre>
+        <precio>5.00</precio>
+        <descripcion>Deliciosos snacks de pollo para perros.</descripcion>
+        <caracteristicas>
+            <categoria>perro</categoria>
+            <categoria>snack</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Comida seca para gatos</nombre>
+        <precio>20.00</precio>
+        <descripcion>Alimento seco completo para gatos adultos.</descripcion>
+        <caracteristicas>
+            <categoria>gato</categoria>
+            <categoria>seco</categoria>
+            <categoria>adulto</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Snacks para gatos</nombre>
+        <precio>5.00</precio>
+        <descripcion>Deliciosos snacks de pollo para perros.</descripcion>
+        <caracteristicas>
+            <categoria>gato</categoria>
+            <categoria>snack</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Nutribird P15 Tropical</nombre>
+        <precio>14.00</precio>
+        <descripcion>Alimento extruido completo para loros, con frutas y nutrientes esenciales.</descripcion>
+        <caracteristicas>
+            <categoria>aves</categoria>
+            <categoria>seco</categoria>
+            <categoria>exòtico</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>ReptiZoo Alimento para Tortugas Acuáticas</nombre>
+        <precio>7.00</precio>
+        <descripcion>Pellets flotantes con calcio y proteínas para tortugas acuáticas.</descripcion>
+        <caracteristicas>
+            <categoria>reptiles</categoria>
+            <categoria>seco</categoria>
+            <categoria>acuaticos</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Alimento para hámsters</nombre>
+        <precio>8.00</precio>
+        <descripcion>Mezcla de semillas y gránulos para hámsters.</descripcion>
+        <caracteristicas>
+            <categoria>roedores</categoria>
+            <categoria>seco</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Alimento para conejos</nombre>
+        <precio>10.00</precio>
+        <descripcion>Mezcla de heno y pellets para conejos.</descripcion>
+        <caracteristicas>
+            <categoria>roedores</categoria>
+            <categoria>seco</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Alimento para peces tropicales</nombre>
+        <precio>12.00</precio>
+        <descripcion>Escamas de alta calidad para peces tropicales.</descripcion>
+        <caracteristicas>
+            <categoria>peces</categoria>
+            <categoria>seco</categoria>
+            <categoria>tropicales</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
+        <nombre>Alimento para peces de agua fría</nombre>
+        <precio>10.00</precio>
+        <descripcion>Escamas de alta calidad para peces de agua fría.</descripcion>
+        <caracteristicas>
+            <categoria>peces</categoria>
+            <categoria>seco</categoria>
+            <categoria>agua fría</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="juguete">
+        <nombre>Rascador para gatos</nombre>
+        <precio>20.00</precio>
+        <descripcion>Rascador especializado para gatos.</descripcion>
+        <caracteristicas>
+            <categoria>gato</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="juguete">
+        <nombre>Disco volador</nombre>
+        <precio>5.22</precio>
+        <descripcion>Disco volador de caucho natural, suave para los dientes y encías del perro. Perfecto para juegos de lanzar y recoger.</descripcion>
+        <caracteristicas>
+            <categoria>perro</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="juguete">
+        <nombre>Pelota de goma para perros</nombre>
+        <precio>8.00</precio>
+        <descripcion>Pelota de goma resistente para perros.</descripcion>
+        <caracteristicas>
+            <categoria>perro</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+        <producto tipo="juguete">
+        <nombre>Juguete para roedores</nombre>
+        <precio>3.00</precio>
+        <descripcion>Juguete de madera para roedores.</descripcion>
+        <caracteristicas>
+            <categoria>roedores</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="juguete">
+        <nombre>Juguete para aves</nombre>
+        <precio>4.00</precio>
+        <descripcion>Juguete de cuerda para aves.</descripcion>
+        <caracteristicas>
+            <categoria>aves</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="juguete">
+        <nombre>Juguete para tortugas</nombre>
+        <precio>3.50</precio>
+        <descripcion>Juguete flotante para tortugas.</descripcion>
+        <caracteristicas>
+            <categoria>reptiles</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+        <producto tipo="juguete">
+        <nombre>Juguete para conejos</nombre>
+        <precio>4.50</precio>
+        <descripcion>Juguete de heno para conejos.</descripcion>
+        <caracteristicas>
+            <categoria>roedores</categoria>
+            <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+        <producto tipo="juguete">
+        <nombre>Juguete para hámsters</nombre>
+        <precio>3.00</precio>
+        <descripcion>Juguete de rueda para hámsters.</descripcion>
+        <caracteristicas>
+        <categoria>roedores</categoria>
+        <categoria>juguete</categoria>
+        </caracteristicas>
+    </producto>
+</productos>
+

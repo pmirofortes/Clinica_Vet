@@ -1,6 +1,36 @@
 <?php
-include_once '../servicios/conexion.php';
+include_once '../../servicios/conexion.php';
 // COMPROBAR SESION
 // asignar varibles por POST
+if (isset($_GET['id_animal'])) {
+    $id_animal = $_GET['id_animal'];
+} else {
+    // Redirigir a la página de error o mostrar un mensaje de error
+    header('Location: ../../index.php?msg=0');
+    exit();
+}
+
+ // primero consultamos si existe la mascota en la base de datos
+
+$sql = "SELECT * FROM animal WHERE id_animal = $id_animal";
+    $resultado = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($resultado) > 0) {
+        $sql = "DELETE FROM animal WHERE id_animal = $id_animal";
+        if (mysqli_query($conn, $sql)) {
+            header("Location: ../../index.php?msg=1");
+        } else {
+            echo "<script>alert('Error al eliminar la mascota');</script>";
+            echo "<script>window.location.href='../../index.php?msg=2';</script>";
+        }
+    } else {
+        echo "<script>alert('La mascota no existe');</script>";
+        echo "<script>window.location.href='../../index.php?msg=3';</script>";
+        
+    }
+
+
+
+// despues eliminar el animal
+
 
 ?>

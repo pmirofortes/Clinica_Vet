@@ -1,6 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ./vistas/login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,29 +34,33 @@ ini_set('display_errors', 1);
             <li><a href="./fomularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
             <li><a href="./fomularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
             <li><a href="./fomularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+            <li><a href="./vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
     </section>
-
+    <a href="./procesos//logs/logout.php">
+        <button>logout</button>
+    </a>
     <main>
 
         <section>
         <!-- aqui se muestra la tabla de las mascotas -->
-
         <table>
 
             <!-- He puesto el encabezado de lo que queremos enseñar de cada animal -->
             <tr> 
                 <th>Mascota</th>
-                <th>Raza</th>
                 <th>Edad</th>
+                <th>Color</th>
+                <th>Peso</th>
                 <th>Dueño</th>
-                <th>Tamaño</th>
+                <th>Especie</th>
+                <th>Raza</th>
                 <th>Acciones</th>
             </tr>
 
             <?php
                 
                 // Preparamos la consulta, queremos toda la información de la tabla animal
-                $sql = "SELECT * FROM animal";
+                $sql = "SELECT * FROM animal INNER JOIN raza ON animal.id_raza = raza.id_raza INNER JOIN especie ON animal.id_especie = especie.id_especie INNER JOIN dueno ON animal.dni_dueno = dueno.dni_dueno";
 
                 // Guardamos los resultados
                 $result = mysqli_query($conn, $sql);
@@ -66,11 +76,14 @@ ini_set('display_errors', 1);
 
                         echo "<tr>";
                         echo "<td>{$animal['nombre_animal']}</td>";
-                        echo "<td>{$animal['raza_animal']}</td>";
                         echo "<td>{$animal['edad_animal']}</td>";
+                        echo "<td>{$animal['color_animal']}</td>";
+                        echo "<td>{$animal['peso_animal']}</td>";
                         echo "<td>{$animal['dni_dueno']}</td>";
-                        echo "<td>{$animal['tamano_animal']}</td>";
-                        echo "boton";
+                        echo "<td>{$animal['nombre_especie']}</td>";
+                        echo "<td>{$animal['nombre_raza']}</td>";
+                        echo "<td><a href='./fomularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a></td>";
+                        echo "<td><a href='./procesos/delete/delete_mascota.php?id_animal=" . $animal['id_animal'] . "'> Eliminar </a></td>";
                         echo "</tr>";
 
                     }

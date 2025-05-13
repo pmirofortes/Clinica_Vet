@@ -19,13 +19,13 @@ if (isset($nombre) && isset($nombre_cientifico) && isset($clas)) {
         if (mysqli_query($conn, $sql)) {
             header("Location: ../../index.php");
         } else {
-            echo "<script>alert('Error al registrar el propietario');</script>";
-            echo "<script>window.location.href='../fomularios/registro_nuevo_propietario.php';</script>";
+            echo "<script>alert('Error al registrar la especie');</script>";
+            echo "<script>window.location.href='../fomularios/registro_nueva_especie.php';</script>";
         }
     }
 } else {
     echo "<script>alert('Por favor, complete todos los campos');</script>";
-    echo "<script>window.location.href='../fomularios/registro_nuevo_propietario.php';</script>";
+    echo "<script>window.location.href='../fomularios/registro_nueva_especie.php';</script>";
 }
 
 ?>

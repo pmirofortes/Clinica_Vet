@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../vistas/login.php");
+    exit();
+}
+include('../servicios/conexion.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +51,12 @@
                 
                 <label for="mail">Correo:</label><br>
                 <input type="mail" id="mail" name="mail"><br><br>
+
+                <label for="password">Contraseña:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+
+                <label for="confirmPassword">Repite la contraseña:</label><br>
+                <input type="password" id="confirmPassword" name="confirmPassword"><br><br>
 
                 <input type="submit" value="Registrar Propietario">
 

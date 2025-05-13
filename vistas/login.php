@@ -12,11 +12,11 @@
         <h1>Iniciar sesión</h1>
     </header>
     <section class="menu">
-        <form action="../procesos/login.php" method="POST">
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario"><br><br>
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena"><br><br>
+        <form action="../procesos/logs/login.php" method="POST">
+            <label for="DNI">DNI:</label>
+            <input type="text" id="DNI" name="DNI"><br><br>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password"><br><br>
             <button type="submit">Iniciar sesión</button>
         </form>
     </section>

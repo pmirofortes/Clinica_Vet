@@ -1,6 +1,15 @@
 <?php
 include_once '../../servicios/conexion.php';
-// COMPROBAR SESION
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../vistas/login.php");
+    exit();
+}
+
 // asignar varibles por POST
 if (isset($_GET['id_animal'])) {
     $id_animal = $_GET['id_animal'];

@@ -1,4 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ./login.php");
+    exit();
+}
+
 $xmlFile = '../xml/inventario.xml';
 if (file_exists($xmlFile)) {
     $xml = simplexml_load_file($xmlFile);
@@ -18,6 +27,8 @@ if (file_exists($xmlFile)) {
     <title>Productos Veterinaria</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/animal.jpg">
+    <link rel="stylesheet" href="../front/estilos.css">
+    <script src="../front/validar.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -124,6 +135,25 @@ if (file_exists($xmlFile)) {
 </head>
 <body>
 
+    <nav class="menu" id="menu">
+        <div class="contenido_menu">
+            <img src="../media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
+
+            <li><a href="../index.php" class="link active">Consultas</a>
+            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta</a>
+            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Actualizar</a>
+            <li><a href="./vistas/tienda.php" class="link">Tienda</a>
+                
+        </div>
+
+        
+    </nav>
+
+    <div class="boton_abrir_menu" id="boton">
+        <img src="../media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
+    </div>
+
+<div id="layout">
     <h1>Tienda Veterinaria</h1>
     <div class="productos">
         <?php if ($xml && $xml->producto): ?>
@@ -145,6 +175,7 @@ if (file_exists($xmlFile)) {
             <p>No hay productos disponibles en la tienda.</p>
         <?php endif; ?>
     </div>
+</div>
 
 </body>
 </html>

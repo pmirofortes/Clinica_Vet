@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: ../../vistas/login.php");
+    header("Location: ../vistas/login.php");
     exit();
 }
 ?>

@@ -34,6 +34,17 @@ if (isset($_GET['id_animal'])) {
 </head>
 <body>
 <header><h1>Editar Mascota</h1></header>
+<div class="layout">
+<section class="menu">
+            <li><a href="../index.php" class="link">Consultar mascotas</a>
+            <li><a href="../formularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
+            <li><a href="../formularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
+            <li><a href="../formularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
+            <li><a href="../formularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+            <li><a href="../formularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+            <li><a href="../vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
+            <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
+    </section>
 <section class="form">
     <form method="post" action="../procesos/update/update_mascota.php">
         <!-- Campo oculto para enviar el id_animal -->
@@ -86,5 +97,6 @@ if (isset($_GET['id_animal'])) {
         <input type="submit" name="actualizar_mascota" value="Actualizar Mascota">
     </form>
 </section>
+</div>
 </body>
 </html>

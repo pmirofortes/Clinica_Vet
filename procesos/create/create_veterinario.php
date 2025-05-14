@@ -2,6 +2,16 @@
 
 include_once '../../servicios/conexion.php';
 
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../vistas/login.php");
+    exit();
+}
+
 // Recibir datos del formulario
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
@@ -17,7 +27,7 @@ if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $pass
     // Verificar que las contraseñas coincidan
     if ($password !== $confirmPassword) {
         echo "<script>alert('Las contraseñas no coinciden');</script>";
-        echo "<script>window.location.href='../../fomularios/registro_nuevo_usuario.php';</script>";
+        echo "<script>window.location.href='../../formularios/registro_nuevo_usuario.php';</script>";
         exit();
     }
 
@@ -26,7 +36,7 @@ if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $pass
     $resultado = mysqli_query($conn, $sql);
     if (mysqli_num_rows($resultado) > 0) {
         echo "<script>alert('El veterinario ya existe');</script>";
-        echo "<script>window.location.href='../../fomularios/registro_nuevo_usuario.php';</script>";
+        echo "<script>window.location.href='../../formularios/registro_nuevo_usuario.php';</script>";
         exit();
     }
 
@@ -43,12 +53,12 @@ if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $pass
         exit();
     } else {
         echo "<script>alert('Error al registrar el veterinario');</script>";
-        echo "<script>window.location.href='../../fomularios/registro_nuevo_usuario.php';</script>";
+        echo "<script>window.location.href='../../formularios/registro_nuevo_usuario.php';</script>";
         exit();
     }
 } else {
     echo "<script>alert('Por favor, complete todos los campos');</script>";
-    echo "<script>window.location.href='../../fomularios/registro_nuevo_usuario.php';</script>";
+    echo "<script>window.location.href='../../formularios/registro_nuevo_usuario.php';</script>";
     exit();
 }
 ?>

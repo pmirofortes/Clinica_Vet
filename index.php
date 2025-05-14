@@ -16,7 +16,7 @@ if (!isset($_SESSION['usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mascotas</title>
     <link rel="stylesheet" href="./front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <script src="./front/validar.js"></script>
 </head>
 <body>
 
@@ -25,22 +25,35 @@ if (!isset($_SESSION['usuario'])) {
     include('./servicios/conexion.php');
 
     ?>
+    <div class="layout" id="layout">
+        <header>
+            <h1>Consulta de mascotas</h1>
+        </header>
+
 
     <!-- Barra de navegación para dirigirte a las demás páginas -->
-    <section class="menu">
-            <li><a href="../index.php" class="link active"><img src="./media/lupa.png" class= "icono">Consultar mascotas</a>
-            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
-            <li><a href="./fomularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
-            <li><a href="./fomularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
-            <li><a href="./fomularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
-            <li><a href="./fomularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
-            <li><a href="./vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
-    </section>
+     <!-- MENÚ -->
+    <nav class="menu" id="menu">
+        <div class="contenido_menu">
+            <img src="./media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
+
+            <li><a href="../index.php" class="link active">Consultas</a>
+            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta</a>
+            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Actualizar</a>
+            <li><a href="./vistas/tienda.php" class="link">Tienda</a>
+                
+        </div>
+
+        
+    </nav>
+
+    <div class="boton_abrir_menu" id="boton">
+        <img src="./media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
+    </div>
     <a href="./procesos//logs/logout.php">
         <button>logout</button>
     </a>
     <main>
-
         <section>
         <!-- aqui se muestra la tabla de las mascotas -->
         <table>
@@ -58,6 +71,44 @@ if (!isset($_SESSION['usuario'])) {
             </tr>
 
             <?php
+            if (isset($_GET['id_animal'])){
+                $id_animal = $_GET['id_animal'];
+                // Preparamos la consulta, queremos toda la información de la tabla animal
+                $sql = "SELECT * FROM animal INNER JOIN raza ON animal.id_raza = raza.id_raza INNER JOIN especie ON animal.id_especie = especie.id_especie INNER JOIN dueno ON animal.dni_dueno = dueno.dni_dueno WHERE id_animal = '$id_animal'";
+
+                // Guardamos los resultados
+                $result = mysqli_query($conn, $sql);
+
+                // Convertimos los resultados en un array
+                $listaAnimales = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+                // Comprobamos si se ha conectado bien a la base de datos o los datos no se pueden acceder
+                if(mysqli_num_rows($result) > 0){
+
+                    // Recorremos todo el array con sus respectivos elementos para mostrarlos en la página
+                    foreach( $listaAnimales as $animal){
+
+                        echo "<tr>";
+                        echo "<td>{$animal['nombre_animal']}</td>";
+                        echo "<td>{$animal['edad_animal']}</td>";
+                        echo "<td>{$animal['color_animal']}</td>";
+                        echo "<td>{$animal['peso_animal']}</td>";
+                        echo "<td><a href='./vistas/propietarios.php?dni={$animal['dni_dueno']}'>{$animal['dni_dueno']}</a></td>";
+                        echo "<td>{$animal['nombre_especie']}</td>";
+                        echo "<td>{$animal['nombre_raza']}</td>";
+                        echo "<td><a href='./formularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a></td>";
+                        echo "<td><a href='./procesos/delete/delete_mascota.php?id_animal=" . $animal['id_animal'] . "'> Eliminar </a></td>";
+                        echo "</tr>";
+
+                    }
+
+                } else {
+                    echo "<tr>";
+                    echo "<td colspan='6'>No hay animales registrados</td>";
+                    echo "</tr>";
+                }
+            }
+            else {
                 
                 // Preparamos la consulta, queremos toda la información de la tabla animal
                 $sql = "SELECT * FROM animal INNER JOIN raza ON animal.id_raza = raza.id_raza INNER JOIN especie ON animal.id_especie = especie.id_especie INNER JOIN dueno ON animal.dni_dueno = dueno.dni_dueno";
@@ -79,10 +130,10 @@ if (!isset($_SESSION['usuario'])) {
                         echo "<td>{$animal['edad_animal']}</td>";
                         echo "<td>{$animal['color_animal']}</td>";
                         echo "<td>{$animal['peso_animal']}</td>";
-                        echo "<td>{$animal['dni_dueno']}</td>";
+                        echo "<td><a href='./vistas/propietarios.php?dni={$animal['dni_dueno']}'>{$animal['dni_dueno']}</a></td>";
                         echo "<td>{$animal['nombre_especie']}</td>";
                         echo "<td>{$animal['nombre_raza']}</td>";
-                        echo "<td><a href='./fomularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a></td>";
+                        echo "<td><a href='./formularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a></td>";
                         echo "<td><a href='./procesos/delete/delete_mascota.php?id_animal=" . $animal['id_animal'] . "'> Eliminar </a></td>";
                         echo "</tr>";
 
@@ -92,31 +143,13 @@ if (!isset($_SESSION['usuario'])) {
                     echo "<tr>";
                     echo "<td colspan='6'>No hay animales registrados</td>";
                     echo "</tr>";
-
-                    ?>
-
-                    </table>
-                        <section>
-
-                            <h2>Estamos mejorando la base de datos, la web y otras configuraciones.</h2>
-                            <h3>MANTENIMIENTO</h3>
-
-                            <p>Regarga la página si se ha completado el mantenimiento.</p>
-                        
-                        </section>
-
-                    <?php
-
                 }
-
-                
-
-            ?>
-
+            }
+                    ?>
+            </table>
         </table>
-
-        </section>  
-
+        </section> 
     </main>
+    </div> 
 </body>
 </html>

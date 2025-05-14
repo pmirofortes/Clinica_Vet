@@ -1,6 +1,15 @@
 <?php
 include_once '../../servicios/conexion.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: ../../vistas/login.php");
+    exit();
+}
+
 if (isset($_POST['id_animal']) && isset($_POST['nombre']) && isset($_POST['edad']) && isset($_POST['peso']) && isset($_POST['color']) && isset($_POST['dni_dueño']) && isset($_POST['dni_vet'])) {
     $id_animal = $_POST['id_animal'];
     $nombre = $_POST['nombre'];

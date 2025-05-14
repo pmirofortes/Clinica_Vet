@@ -55,14 +55,6 @@ button:hover {
     gap: 20px;
 }
 
-.menu {
-    width: 25%;
-    background-color: #e9ecef;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 .form {
     width: 75%;
     background-color: white;
@@ -77,17 +69,93 @@ button:hover {
     object-fit: contain;
 }
 
-.link {
-    text-decoration: none;
-    color: black;
-    padding: 5px 10px;
+.menu {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(40, 38, 38, 0.508);
+  position: fixed;
+  visibility: hidden;
 }
 
-.link.active {
-    color: white;
-    background-color: #2d8cff;
-    border-radius: 5px;
-    pointer-events: none; /* Opcional: desactiva el link si ya estás en esa página */
+
+.contenido_menu{
+  padding-left: 30rem;
+  padding-top: 10rem;
+  width: 60%;
+}
+
+.imagen_cruz{
+  width: 80px;
+}
+
+.imagen_cruz:hover{
+  transform: scale(1.1);
+}
+
+.contenido_menu > li{
+  list-style-type: none;
+  width: 100%;
+  margin: 5%;
+  margin-left: 25%;
+}
+
+
+.link {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  padding: 5px 10px;
+  font-size: 40px;
+  cursor: pointer;
+  /* pointer-events: none; */
+}
+
+.link::before{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 0.2rem;
+  background-color: white;
+  bottom: .5rem;
+  transition: 0.3s;
+}
+
+.link:hover{
+  color: white;
+
+}
+
+.link:hover::before{
+  width: 100%;
+}
+
+.link:active {
+  color: white;
+  border-radius: 5px;
+  /* Opcional: desactiva el link si ya estás en esa página */
+}
+
+.boton_abrir_menu{
+  position: fixed;
+  margin: 2rem;
+  border: 2px solid black;
+  border-radius: 150px;
+  padding: 0.5rem;
+  height: 6.5rem;
+  width: 6.5rem;
+  visibility: visible;
+  background-color: white;
+  z-index: 2;
+}
+
+.boton_abrir_menu > img{
+  position: relative;
+  width: 100%;
+}
+
+.boton_abrir_menu:hover{
+  box-shadow: 2px 2px 2px black;
+  transform: scale(1.1);
 }
 
 

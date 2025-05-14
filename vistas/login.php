@@ -11,7 +11,7 @@
     <header>
         <h1>Iniciar sesión</h1>
     </header>
-    <section class="menu">
+    
         <form action="../procesos/logs/login.php" method="POST">
             <label for="DNI">DNI:</label>
             <input type="text" id="DNI" name="DNI"><br><br>
@@ -19,6 +19,6 @@
             <input type="password" id="password" name="password"><br><br>
             <button type="submit">Iniciar sesión</button>
         </form>
-    </section>
+   
 </body>
 </html>

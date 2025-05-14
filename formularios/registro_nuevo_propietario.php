@@ -23,13 +23,15 @@ include('../servicios/conexion.php');
     </header>
     <div class="layout">
         <section class="menu">
-            <li><a href="../index.php" class="link">Consultar mascotas</a></li>
-            <li><a href="../fomularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a></li>
-            <li><a href="../fomularios/registro_nuevo_propietario.php" class="link active">Dar de alta propietario</a></li>
-            <li><a href="../fomularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a></li>
-            <li><a href="../fomularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
-            <li><a href="../fomularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
-        </section>
+            <li><a href="../index.php" class="link active">Consultar mascotas</a>
+            <li><a href="../formularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
+            <li><a href="../formularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
+            <li><a href="../formularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
+            <li><a href="../formularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+            <li><a href="../formularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+            <li><a href="../vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
+            <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
+    </section>
         <section class="form">
             <form action="../procesos/create/create_propietario.php" method="post">
                 <label for="nombre">Nombre:</label><br>

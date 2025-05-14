@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: ../vistas/login.php");
+    header("Location: ./login.php");
     exit();
 }
 
@@ -22,8 +22,15 @@ include('../servicios/conexion.php');
 <body>
 
 <section class="menu">
-    <!-- Menú -->
-</section>
+            <li><a href="../index.php" class="link">Consultar mascotas</a>
+            <li><a href="../formularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
+            <li><a href="../formularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
+            <li><a href="../formularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
+            <li><a href="../formularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+            <li><a href="../formularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+            <li><a href="./razas_especies.php" class="link active">Consultar especies y razas</a></li>
+            <li><a href="./propietarios.php" class="link">Consultar propietarios</a></li>
+    </section>
 
 <a href="../procesos/logs/logout.php"><button>Cerrar sesion</button></a>
 

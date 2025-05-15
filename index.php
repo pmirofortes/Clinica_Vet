@@ -17,6 +17,7 @@ if (!isset($_SESSION['usuario'])) {
     <title>Mascotas</title>
     <link rel="stylesheet" href="./front/estilos.css">
     <script src="./front/validar.js"></script>
+    <link rel="icon" href="./front/media/favicon.png" type="image/png">
 </head>
 <body>
 

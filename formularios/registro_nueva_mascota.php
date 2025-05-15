@@ -5,7 +5,16 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 include('../servicios/conexion.php');
+$dni_vet = $_SESSION['dni'];
+
+
+// Cargar especies
+$especies = mysqli_query($conn, "SELECT id_especie, nombre_especie FROM especie");
+
+// Cargar razas
+$razasQuery = mysqli_query($conn, "SELECT id_raza, nombre_raza, id_especie FROM raza");
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,66 +26,79 @@ include('../servicios/conexion.php');
 <header><h1>Registro de Mascota</h1></header>
 <div class="layout">
 <section class="menu">
-            <li><a href="../index.php" class="link active">Consultar mascotas</a>
-            <li><a href="../formularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
-            <li><a href="../formularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
-            <li><a href="../formularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
-            <li><a href="../formularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
-            <li><a href="../formularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
-            <li><a href="../vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
-            <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
-    </section>
+    <li><a href="../index.php" class="link active">Consultar mascotas</a></li>
+    <li><a href="registro_nueva_mascota.php" class="link">Dar de alta mascota</a></li>
+    <li><a href="registro_nuevo_propietario.php" class="link">Dar de alta propietario</a></li>
+    <li><a href="registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a></li>
+    <li><a href="registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
+    <li><a href="registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
+    <li><a href="../vistas/razas_especies.php" class="link">Consultar especies y razas</a></li>
+    <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
+</section>
 
 <section class="form">
     <form method="post" action="../procesos/create/create_mascota.php">
         <label>Nombre:</label><br>
-        <input type="text" name="nombre" value="<?= htmlspecialchars($_SESSION['nombre'] ?? '') ?>"><br><br>
+        <input type="text" name="nombre"><br><br>
 
         <label>Fecha nacimiento:</label><br>
-        <input type="date" name="edad" value="<?= htmlspecialchars($_SESSION['edad'] ?? '') ?>"><br><br>
+        <input type="date" name="edad"><br><br>
 
         <label>Peso:</label><br>
-        <input type="number" name="peso" value="<?= htmlspecialchars($_SESSION['peso'] ?? '') ?>"> kg<br><br>
+        <input type="number" name="peso"> kg<br><br>
 
         <label>Color:</label><br>
-        <input type="text" name="color" value="<?= htmlspecialchars($_SESSION['color'] ?? '') ?>"><br><br>
+        <input type="text" name="color"><br><br>
 
         <label>DNI Dueño:</label><br>
-        <input type="text" name="dni_dueño" value="<?= htmlspecialchars($_SESSION['dni_dueño'] ?? '') ?>"><br><br>
+        <input type="text" name="dni_dueño"><br><br>
 
         <label>DNI Veterinario:</label><br>
-        <input type="text" name="dni_vet" value="<?= htmlspecialchars($_SESSION['dni_vet'] ?? '') ?>">
-        <br><br>
+        <input type="text" name="dni_vet" value="<?php echo $dni_vet; ?>"><br><br>
 
         <label>Especie:</label><br>
-        <select name="especie">
+        <select name="especie" id="especie">
             <option value="">Seleccionar especie</option>
-            <?php
-            $sql = "SELECT id_especie, nombre_especie FROM especie";
-            $res = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $selected = (isset($_POST['especie']) && $_POST['especie'] == $row['id_especie']) ? 'selected' : '';
-                echo "<option value='{$row['id_especie']}' $selected>{$row['nombre_especie']}</option>";
-            }
-            ?>
+            <?php while ($esp = mysqli_fetch_assoc($especies)) : ?>
+                <option value="<?= $esp['id_especie'] ?>"><?= $esp['nombre_especie'] ?></option>
+            <?php endwhile; ?>
         </select><br><br>
 
         <label>Raza:</label><br>
-        <select name="raza">
+        <select name="raza" id="raza">
             <option value="">Seleccionar raza</option>
-            <?php
-            $sql = "SELECT id_raza, nombre_raza FROM raza";
-            $res = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $selected = (isset($_POST['raza']) && $_POST['raza'] == $row['id_raza']) ? 'selected' : '';
-                echo "<option value='{$row['id_raza']}' $selected>{$row['nombre_raza']}</option>";
-            }
-            ?>
+            <?php while ($r = mysqli_fetch_assoc($razasQuery)) : ?>
+                <option value="<?= $r['id_raza'] ?>" data-especie="<?= $r['id_especie'] ?>">
+                    <?= $r['nombre_raza'] ?>
+                </option>
+            <?php endwhile; ?>
         </select><br><br>
 
-        <input type="submit" name="registrar_mascota" value="Registrar Mascota" >
+        <input type="submit" name="registrar_mascota" value="Registrar Mascota">
     </form>
 </section>
 </div>
+
+<script>
+const especieSelect = document.getElementById('especie');
+const razaSelect = document.getElementById('raza');
+
+// Guardamos todas las razas al inicio
+const todasLasRazas = Array.from(razaSelect.options).filter(opt => opt.value !== "");
+
+especieSelect.addEventListener('change', function () {
+    const especieId = this.value;
+
+    // Limpiar el select de razas
+    razaSelect.innerHTML = '<option value="">Seleccionar raza</option>';
+
+    // Filtrar las que coincidan con el data-especie
+    todasLasRazas.forEach(opt => {
+        if (opt.dataset.especie === especieId) {
+            razaSelect.appendChild(opt);
+        }
+    });
+});
+</script>
 </body>
 </html>

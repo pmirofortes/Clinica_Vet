@@ -6,19 +6,17 @@
     <title>Login</title>
     <link rel="stylesheet" href="../front/estilos.css">
     <script src="../front/validar.js"></script>
+
 </head>
 <body>
-    <header>
-        <h1>Iniciar sesión</h1>
-    </header>
-    
-        <form action="../procesos/logs/login.php" method="POST">
-            <label for="DNI">DNI:</label>
-            <input type="text" id="DNI" name="DNI"><br><br>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password"><br><br>
-            <button type="submit">Iniciar sesión</button>
-        </form>
-   
+    <div class="login wrap">
+        <div class="h1">Login</div>
+        <form class="form" action="../procesos/logs/login.php" method="POST">
+            <input placeholder="DNI" id="DNI" name="DNI" type="text">
+            <input placeholder="Contraseña" id="password" name="password" type="password">
+            <button class="login-btn">Sign up<div class="arrow-wrapper"><div class="arrow"></div></div></button>
+        </form> 
+    </div>
 </body>
 </html>
+

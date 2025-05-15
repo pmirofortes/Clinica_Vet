@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $veterinario['password'])) {
             session_start();
             $_SESSION['usuario'] = $veterinario['nombre_veterinario'];
+            $_SESSION['dni'] = $dni;
             header("Location: ../../vistas/bienvenida.php");
             exit();
         } else {

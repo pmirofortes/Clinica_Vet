@@ -14,7 +14,7 @@ $producto = isset($_GET['producto']) ? htmlspecialchars($_GET['producto']) : 'Pr
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gracias por tu compra</title>
     <link rel="stylesheet" href="css/comprar.css">

@@ -96,6 +96,24 @@
         </caracteristicas>
     </producto>
     <producto tipo="alimento">
+        <nombre>Alimento para roedores</nombre>
+        <precio>7.50</precio>
+        <descripcion>Alimento seco para todo tipo de roedores.</descripcion>
+        <caracteristicas>
+            <categoria>roedores</categoria>
+            <categoria>seco</categoria>
+        </caracteristicas>
+    </producto>
+        <producto tipo="alimento">
+        <nombre>Alimento para reptiles</nombre>
+        <precio>15.50</precio>
+        <descripcion>Alimento para camaleones, tortugas terrestres y dragones.</descripcion>
+        <caracteristicas>
+            <categoria>reptiles</categoria>
+            <categoria>seco</categoria>
+        </caracteristicas>
+    </producto>
+    <producto tipo="alimento">
         <nombre>Alimento para peces de agua fría</nombre>
         <precio>10.00</precio>
         <descripcion>Escamas de alta calidad para peces de agua fría.</descripcion>
@@ -111,7 +129,6 @@
         <descripcion>Rascador especializado para gatos.</descripcion>
         <caracteristicas>
             <categoria>gato</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
     <producto tipo="juguete">
@@ -120,7 +137,6 @@
         <descripcion>Disco volador de caucho natural, suave para los dientes y encías del perro. Perfecto para juegos de lanzar y recoger.</descripcion>
         <caracteristicas>
             <categoria>perro</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
     <producto tipo="juguete">
@@ -129,7 +145,6 @@
         <descripcion>Pelota de goma resistente para perros.</descripcion>
         <caracteristicas>
             <categoria>perro</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
         <producto tipo="juguete">
@@ -138,7 +153,6 @@
         <descripcion>Juguete de madera para roedores.</descripcion>
         <caracteristicas>
             <categoria>roedores</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
     <producto tipo="juguete">
@@ -147,7 +161,6 @@
         <descripcion>Juguete de cuerda para aves.</descripcion>
         <caracteristicas>
             <categoria>aves</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
     <producto tipo="juguete">
@@ -156,7 +169,6 @@
         <descripcion>Juguete flotante para tortugas.</descripcion>
         <caracteristicas>
             <categoria>reptiles</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
         <producto tipo="juguete">
@@ -165,7 +177,6 @@
         <descripcion>Juguete de heno para conejos.</descripcion>
         <caracteristicas>
             <categoria>roedores</categoria>
-            <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
         <producto tipo="juguete">
@@ -174,7 +185,6 @@
         <descripcion>Juguete de rueda para hámsters.</descripcion>
         <caracteristicas>
         <categoria>roedores</categoria>
-        <categoria>juguete</categoria>
         </caracteristicas>
     </producto>
 </productos>

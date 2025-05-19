@@ -4,18 +4,18 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: ../vistas/login.php");
     exit();
 }
-if (isset($_GET['id_animal'])) {
-    $id_animal = $_GET['id_animal'];
+if (isset($_GET['id_raza'])) {
+    $id_raza = $_GET['id_raza'];
     include_once '../servicios/conexion.php';
 
-    // Consulta para obtener los datos de la mascota
-    $sql = "SELECT * FROM animal WHERE id_animal = $id_animal";
+    // Consulta para obtener los datos de la raza
+    $sql = "SELECT * FROM raza WHERE id_raza = $id_raza";
     $result = mysqli_query($conn, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        $mascota = mysqli_fetch_assoc($result);
+        $raza = mysqli_fetch_assoc($result);
     } else {
-        // Redirigir si no se encuentra la mascota
+        // Redirigir si no se encuentra la raza
         header('Location: ../index.php');
         exit();
     }
@@ -29,33 +29,17 @@ if (isset($_GET['id_animal'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Mascota</title>
+    <title>Editar Raza</title>
     <link rel="stylesheet" href="../front/estilos.css">
 </head>
 <body>
-<header><h1>Editar Mascota</h1></header>
+<header><h1>Editar Raza</h1></header>
 <section class="form">
-    <form method="post" action="../procesos/update/update_mascota.php">
-        <!-- Campo oculto para enviar el id_animal -->
-        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
+    <form method="post" action="../procesos/update/update_raza.php">
+        <input type="hidden" name="id_raza" value="<?= $id_raza ?>">
 
-        <label>Nombre:</label><br>
-        <input type="text" name="nombre" value="<?= $mascota['nombre_animal'] ?>"><br><br>
-
-        <label>Fecha nacimiento:</label><br>
-        <input type="date" name="edad" value="<?= $mascota['edad_animal'] ?>"><br><br>
-
-        <label>Peso:</label><br>
-        <input type="number" name="peso" value="<?= $mascota['peso_animal'] ?>"> kg<br><br>
-
-        <label>Color:</label><br>
-        <input type="text" name="color" value="<?= $mascota['color_animal'] ?>"><br><br>
-
-        <label>DNI Dueño:</label><br>
-        <input type="text" name="dni_dueño" value="<?= $mascota['dni_dueno'] ?>"><br><br>
-
-        <label>DNI Veterinario:</label><br>
-        <input type="text" name="dni_vet" value="<?= $mascota['dni_veterinario'] ?>"><br><br>
+        <label>Nombre raza:</label><br>
+        <input type="text" name="nombre" value="<?= $raza['nombre_raza'] ?>"><br><br>
 
         <label>Especie:</label><br>
         <select name="especie">
@@ -64,26 +48,12 @@ if (isset($_GET['id_animal'])) {
             $sql = "SELECT id_especie, nombre_especie FROM especie";
             $res = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($res)) {
-                $selected = ($mascota['id_especie'] == $row['id_especie']) ? 'selected' : '';
+                $selected = ($raza['id_especie'] == $row['id_especie']) ? 'selected' : '';
                 echo "<option value='{$row['id_especie']}' $selected>{$row['nombre_especie']}</option>";
             }
             ?>
         </select><br><br>
-
-        <label>Raza:</label><br>
-        <select name="raza">
-            <option value="">Seleccionar raza</option>
-            <?php
-            $sql = "SELECT id_raza, nombre_raza FROM raza";
-            $res = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $selected = ($mascota['id_raza'] == $row['id_raza']) ? 'selected' : '';
-                echo "<option value='{$row['id_raza']}' $selected>{$row['nombre_raza']}</option>";
-            }
-            ?>
-        </select><br><br>
-
-        <input type="submit" name="actualizar_mascota" value="Actualizar Mascota">
+        <input type="submit" name="actualizar_raza" value="Actualizar Raza">
     </form>
 </section>
 </body>

@@ -28,7 +28,8 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos Veterinaria</title>
-    <!-- <link rel="stylesheet" href="../front/estilos.css"> -->
+    <link rel="stylesheet" href="../front/estilos.css">
+    <script src="../front/validar.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -83,7 +84,7 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
             height: 80px;
             background: rgba(76,175,80,0.07);
             border-radius: 50%;
-            z-index: 0;
+            /* z-index: 0; */
         }
 
         .producto:hover {
@@ -97,7 +98,7 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
             margin-bottom: 12px;
             letter-spacing: 1px;
             font-weight: 600;
-            z-index: 1;
+            /* z-index: 1; */
             position: relative;
         }
 
@@ -105,7 +106,7 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
             margin: 12px 0;
             font-size: 1.08em;
             line-height: 1.6;
-            z-index: 1;
+            /* z-index: 1; */
             position: relative;
         }
 
@@ -251,7 +252,25 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
 
 </head>
 <body>
+    <nav class="menu" id="menu">
+        <div class="contenido_menu">
+            <img src="../media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
 
+            <li><a href="./consultas.php" class="link active">Consultas</a>
+            <li><a href="./dar_de_alta.php" class="link">Dar de alta</a>
+            <li><a href="./actualizar.php" class="link">Actualizar</a>
+            <li><a href="./tienda.php" class="link">Tienda</a>
+                
+        </div>
+
+        
+    </nav>
+    
+    <div class="boton_abrir_menu" id="boton">
+        <img src="../media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
+    </div>
+    
+    <main id="layout">
     <h1>TIENDA VETERINARIA</h1>
 
     <form method="GET" class="filtro-form">
@@ -319,7 +338,7 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
             <p>No hay productos disponibles en la tienda.</p>
         <?php endif; ?>
     </div>
-
+    </main>
 </body>
 </html>
 

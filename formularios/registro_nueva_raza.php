@@ -33,11 +33,11 @@ include('../servicios/conexion.php');
     </section>
         <section class="form">
             <form action="../procesos/create/create_raza.php" method="post">
-                <label for="nombre">Nombre raza:</label><br>
-                <input type="text" id="nombre" name="nombre"><br><br>
+                <label for="nombre_raza">Nombre raza:</label><br>
+                <input type="text" id="nombre_raza" name="nombre_raza"><br><br>
                 
-                <label for="especie">Especie:</label><br>
-                <select name="especie">
+                <label for="id_especie">Especie:</label><br>
+                <select name="id_especie">
                     <option value="">Seleccionar especie</option>
                     <?php
                     $sql = "SELECT id_especie, nombre_especie FROM especie";
@@ -51,7 +51,7 @@ include('../servicios/conexion.php');
                     }
                     ?>
                 </select><br><br>
-
+                <input type="hidden" name="id_raza" value="<?php echo $id_raza; ?>">
                 <input type="submit" value="Registrar Especie">
 
             </form> 

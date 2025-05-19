@@ -49,6 +49,8 @@ if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $pass
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('Veterinario registrado exitosamente');</script>";
+        session_start();
+        $_SESSION['DNI'] = $DNI; // Guardar el DNI en la sesión
         header("Location: ../../index.php");
         exit();
     } else {

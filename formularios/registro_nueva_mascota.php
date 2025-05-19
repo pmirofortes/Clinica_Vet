@@ -80,25 +80,32 @@ $razasQuery = mysqli_query($conn, "SELECT id_raza, nombre_raza, id_especie FROM 
 </div>
 
 <script>
-const especieSelect = document.getElementById('especie');
-const razaSelect = document.getElementById('raza');
 
-// Guardamos todas las razas al inicio
-const todasLasRazas = Array.from(razaSelect.options).filter(opt => opt.value !== "");
+    var especieSelect = document.getElementById('especie');
+    var razaSelect = document.getElementById('raza');
 
-especieSelect.addEventListener('change', function () {
-    const especieId = this.value;
+    // Guardamos todas las razas al inicio
+    var todasLasRazas = [];
+    for (var i = 0; i < razaSelect.options.length; i++) {
+        todasLasRazas.push(razaSelect.options[i]);
+    }
 
-    // Limpiar el select de razas
-    razaSelect.innerHTML = '<option value="">Seleccionar raza</option>';
+    especieSelect.addEventListener('change', function () {
+        var especieId = especieSelect.value;
 
-    // Filtrar las que coincidan con el data-especie
-    todasLasRazas.forEach(opt => {
-        if (opt.dataset.especie === especieId) {
-            razaSelect.appendChild(opt);
+        // Limpiar el select de razas
+        razaSelect.innerHTML = '<option value="">Seleccionar raza</option>';
+
+        // Recorrer todas las opciones y añadir solo las que coinciden
+        for (var i = 0; i < todasLasRazas.length; i++) {
+            var opt = todasLasRazas[i];
+            if (opt.getAttribute('data-especie') === especieId) {
+                razaSelect.appendChild(opt);
+            }
         }
     });
-});
+
+
 </script>
 </body>
 </html>

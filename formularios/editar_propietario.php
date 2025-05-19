@@ -62,9 +62,10 @@ if (isset($_GET['dni_dueno'])) {
                 
                 <label for="DNI">DNI:</label><br>
                 <input type="text" id="DNI" name="DNI" value="<?= $propietario['dni_dueno'] ?>"><br><br>
+                <input type="hidden" id="DNI_original" name="DNI_original" value="<?= $propietario['dni_dueno'] ?>"><br><br>
 
-                <label for="fecha">Fecha de nacimiento:</label><br>
-                <input type="date" id="fecha" name="fecha" value="<?= $propietario['edad_dueno'] ?>"><br><br>
+                <label for="edad">Fecha de nacimiento:</label><br>
+                <input type="date" id="edad" name="edad" value="<?= $propietario['edad_dueno'] ?>"><br><br>
 
                 <label for="telefono">Teléfono:</label><br>
                 <input type="text" id="telefono" name="telefono" value="<?= $propietario['telefono_dueno'] ?>"><br><br>

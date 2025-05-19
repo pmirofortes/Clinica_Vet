@@ -244,73 +244,6 @@ body {
     
 }
 
-/* BOTON LOGOUT */
-.Btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 45px;
-  height: 45px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition-duration: .3s;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: rgb(163, 142, 255);
-}
-
-/* plus sign */
-.sign {
-  width: 100%;
-  transition-duration: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sign svg {
-  width: 17px;
-}
-
-.sign svg path {
-  fill: white;
-}
-/* text */
-.text {
-  position: absolute;
-  right: 0%;
-  width: 0%;
-  opacity: 0;
-  color: white;
-  font-size: 1em;
-  font-weight: 600;
-  transition-duration: .3s;
-}
-/* hover effect on button width */
-.Btn:hover {
-  width: 125px;
-  border-radius: 40px;
-  transition-duration: .3s;
-}
-
-.Btn:hover .sign {
-  width: 30%;
-  transition-duration: .3s;
-  padding-left: 5px;
-}
-/* hover effect button's text */
-.Btn:hover .text {
-  opacity: 1;
-  width: 70%;
-  transition-duration: .3s;
-  padding-left: 10px;
-}
-/* button click effect*/
-.Btn:active {
-  transform: translate(2px ,2px);
-}
 
 /* LOGIN FORM */
 .login {
@@ -347,7 +280,6 @@ body {
 }
 
 .login input[type=submit],
-.login-btn,
 .h1 {
   border: 0;
   outline: 0;
@@ -366,20 +298,6 @@ body {
   display: block;
   margin-bottom: -0px;
   font-size: 1.3em;
-}
-
-.btn {
-  background: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-  color: #fff;
-  padding: 16px !important;
-}
-
-.btn:hover {
-  background: linear-gradient(144deg, #1e1e1e , 20%,#1e1e1e 50%,#1e1e1e );
-  color: rgb(255, 255, 255);
-  padding: 16px !important;
-  cursor: pointer;
-  transition: all 0.4s ease;
 }
 
 .login input[type=text] {
@@ -438,7 +356,7 @@ body {
   }
 }
 /* BOTON ENVIAR */ 
-.button-enviar {
+.login-btn {
   --primary-color: #645bff;
   --secondary-color: #fff;
   --hover-color: #111;
@@ -446,24 +364,28 @@ body {
   --arrow-stroke: 2px;
   box-sizing: border-box;
   border: 0;
-  border-radius: 20px;
+  border-radius: 500px;
+  outline: 0;
+  width: 100%;
   color: var(--secondary-color);
-  padding: 1em 1.8em;
+  padding: 13px;
+  margin: 40px 0 0 0;
   background: var(--primary-color);
   display: flex;
   transition: 0.2s background;
   align-items: center;
   gap: 0.6em;
-  font-weight: bold;
+  font-weight: 600;
+  animation: bounce2 1.6s;
 }
 
-.button-enviar .arrow-wrapper {
+.login-btn .arrow-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.button-enviar .arrow {
+.login-btn .arrow {
   margin-top: 1px;
   width: var(--arrow-width);
   background: var(--primary-color);
@@ -472,7 +394,7 @@ body {
   transition: 0.2s;
 }
 
-.button-enviar .arrow::before {
+.login-btn .arrow::before {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -486,15 +408,15 @@ body {
   transform: rotate(-45deg);
 }
 
-.button-enviar:hover {
+.login-btn:hover {
   background-color: var(--hover-color);
 }
 
-.button-enviar:hover .arrow {
+.login-btn:hover .arrow {
   background: var(--secondary-color);
 }
 
-.button-enviar:hover .arrow:before {
+.login-btn:hover .arrow:before {
   right: 0;
 }
 /* Animación del botón */
@@ -617,4 +539,119 @@ body {
 
 .form_button:active {
   border: 1px solid #2e8644;
+}
+
+
+
+
+/* Botón */
+
+#opciones{
+  transition: background 0.05s ease-out;
+  background: radial-gradient(circle,#af40ff 10%, #491a6b 40%, #000000 100%);
+}
+
+
+.contenido_de_botones{
+  width: 100%;  
+  height: 100vh;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+
+.boton_eleccion {
+  align-items: center;
+  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: flex;
+  font-size: 28px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 350px;
+  min-width: 340px;
+  min-height: 40px;
+  max-height: 75px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 5%;
+  margin-left: 15%;
+}
+
+.boton_eleccion:active,
+.boton_eleccion:hover {
+  outline: 0;
+  scale: 1.1;
+}
+
+.boton_eleccion span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.boton_eleccion:hover span {
+  background: none;
+}
+
+.boton_eleccion:active {
+  transform: scale(0.9);
+}
+
+.imagenes_opccion{
+  width: auto;
+  max-width: 60%;
+  position: fixed;
+  top: 15%;
+  right: 0.5rem;
+  border-radius: 20px;
+  overflow: hidden;
+  height: auto;
+  max-height: 70vh;
+  visibility: hidden;
+}
+
+
+
+
+
+
+
+
+/* Media queries botón */
+
+@media(max-width: 700px) {
+  .imagenes_opccion{
+    position: absolute;
+      max-width: 100%;
+  }
+
+  .boton_eleccion{
+    margin-left: 5%;
+  }
+
+  .contenido_de_botones{
+    padding-top: 340px;
+  }
+
+  .contenido_menu{
+  padding-left: 1rem;
+  padding-top: 10rem;
+  width: 60%;
+}
+
 }

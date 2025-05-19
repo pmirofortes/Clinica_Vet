@@ -38,9 +38,9 @@ if (!isset($_SESSION['usuario'])) {
         <div class="contenido_menu">
             <img src="./media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
 
-            <li><a href="../index.php" class="link active">Consultas</a>
-            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Dar de alta</a>
-            <li><a href="./fomularios/registro_nueva_mascota.php" class="link">Actualizar</a>
+            <li><a href="./vistas/consultas.php" class="link active">Consultas</a>
+            <li><a href="./vistas/dar_de_alta.php" class="link">Dar de alta</a>
+            <li><a href="./vistas/actualizar.php" class="link">Actualizar</a>
             <li><a href="./vistas/tienda.php" class="link">Tienda</a>
                 
         </div>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['usuario'])) {
     <div class="boton_abrir_menu" id="boton">
         <img src="./media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
     </div>
-    <a href="./procesos//logs/logout.php">
+    <a href="./procesos/logs/logout.php">
         <button>logout</button>
     </a>
     <main>
@@ -76,6 +76,7 @@ if (!isset($_SESSION['usuario'])) {
                 $id_animal = $_GET['id_animal'];
                 // Preparamos la consulta, queremos toda la información de la tabla animal
                 $sql = "SELECT * FROM animal INNER JOIN raza ON animal.id_raza = raza.id_raza INNER JOIN especie ON animal.id_especie = especie.id_especie INNER JOIN dueno ON animal.dni_dueno = dueno.dni_dueno WHERE id_animal = '$id_animal'";
+
 
                 // Guardamos los resultados
                 $result = mysqli_query($conn, $sql);

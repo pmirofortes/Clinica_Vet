@@ -27,7 +27,9 @@ if (isset($_SESSION['dni'])) {
         <div class="inputGroup">
             <input type="text" required="" name="DNI" id="DNI" value="<?php echo $propietario['dni_veterinario']; ?>">
             <label for="DNI">DNI</label>
+            <input type="hidden" required="" name="DNI_original" id="DNI_original" value="<?php echo $propietario['dni_veterinario']; ?>">
         </div>
+
         <div class="inputGroup">
             <input type="text" required="" name="nombre" id="nombre" value="<?php echo $propietario['nombre_veterinario']; ?>">
             <label for="nombre">Nombre</label>
@@ -41,7 +43,7 @@ if (isset($_SESSION['dni'])) {
             <label for="edad">Edad</label>
         </div>
         <div class="inputGroup">
-            <input type="text" required="" name="Localidad" id="localidad" value="<?php echo $propietario['localidad_veterinario']; ?>">
+            <input type="text" required="" name="localidad" id="localidad" value="<?php echo $propietario['localidad_veterinario']; ?>">
             <label for="Localidad">Localidad</label>
         </div>
         <div class="inputGroup">

@@ -1,7 +1,7 @@
 <?php
 include_once '../../servicios/conexion.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['DNI']) && $_POST['DNI'] != "" && $_POST['DNI'] != null && strlen($_POST['DNI']) > 0 && strlen($_POST['DNI']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['DNI']) == 1) && isset($_POST['password']) && $_POST['password'] != "" && $_POST['password'] != null && strlen($_POST['password'] > 8)){
     $dni = mysqli_real_escape_string($conn, $_POST['DNI']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // Si no se accede mediante POST, redirigir al login
-    header("Location: ../vistas/login.php");
+    header("Location: ../../vistas/login.php");
     exit();
 }
 ?>

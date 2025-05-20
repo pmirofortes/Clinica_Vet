@@ -15,7 +15,7 @@ $nombre = $_POST['nombre'];
 $nombre_cientifico = $_POST['nombre_cientifico'];
 $clas = $_POST['clas'];
 
-if (isset($nombre) && isset($nombre_cientifico) && isset($clas) ) {
+if (isset($nombre) && isset($nombre_cientifico) && isset($clas) && strlen($nombre) > 2 && strlen($nombre_cientifico) > 2 && strlen($clas) > 2) {
     // COMPROBAR QUE NO EXISTE LA ESPECIE
     $sql = "SELECT * FROM especie WHERE nombre_especie = '$nombre'";
     $resultado = mysqli_query($conn, $sql);

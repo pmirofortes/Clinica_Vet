@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-if (isset($_POST['id_animal']) && isset($_POST['nombre']) && isset($_POST['edad']) && isset($_POST['peso']) && isset($_POST['color']) && isset($_POST['dni_dueño']) && isset($_POST['dni_vet'])) {
+if (isset($_POST['id_animal']) && isset($_POST['nombre']) && isset($_POST['edad']) && isset($_POST['peso']) && isset($_POST['color']) && isset($_POST['dni_dueño']) && isset($_POST['dni_vet']) && $_POST['nombre'] != null && $_POST['nombre'] != "" && $_POST['edad'] != null && $_POST['edad'] != "" && $_POST['peso'] != null && $_POST['peso'] != "" && $_POST['color'] != null && $_POST['color'] != "" && strlen($_POST['dni_vet']) > 7 && strlen($_POST['dni_vet']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['dni_vet']) == 1)) {
     $id_animal = $_POST['id_animal'];
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];

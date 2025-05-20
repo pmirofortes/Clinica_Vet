@@ -11,10 +11,10 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 // asignar varibles por POST
-$nombre = $_POST['nombre'];
-$especie = $_POST['especie'];
+$nombre = $_POST['nombre_raza'];
+$especie = $_POST['id_especie'];
 
-if (isset($nombre) && isset($especie)) {
+if (isset($nombre) && isset($especie) && $nombre != null && $especie != null && $nombre != "" && $especie != "") {
     // COMPROBAR QUE NO EXISTE LA RAZA
     $sql = "SELECT * FROM raza WHERE nombre_raza = '$nombre'";
     $resultado = mysqli_query($conn, $sql);
@@ -33,7 +33,7 @@ if (isset($nombre) && isset($especie)) {
     }
 } else {
     echo "<script>alert('Por favor, complete todos los campos');</script>";
-    echo "<script>window.location.href='../formularios/registro_nueva_raza.php';</script>";
+    echo "<script>window.location.href='../../formularios/registro_nueva_raza.php';</script>";
 }
 
 ?>

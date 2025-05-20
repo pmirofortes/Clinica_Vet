@@ -18,23 +18,32 @@ include('../servicios/conexion.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Especies y Razas</title>
     <link rel="stylesheet" href="../front/estilos.css">
+    <script src="../front/validar.js"></script>
 </head>
 <body>
 
-<section class="menu">
-            <li><a href="../index.php" class="link">Consultar mascotas</a>
-            <li><a href="../formularios/registro_nueva_mascota.php" class="link">Dar de alta mascota</a>
-            <li><a href="../formularios/registro_nuevo_propietario.php" class="link">Dar de alta propietario</a>
-            <li><a href="../formularios/registro_nuevo_usuario.php" class="link">Dar de alta veterinario</a>
-            <li><a href="../formularios/registro_nueva_especie.php" class="link">Dar de alta especie</a></li>
-            <li><a href="../formularios/registro_nueva_raza.php" class="link">Dar de alta raza</a></li>
-            <li><a href="./razas_especies.php" class="link active">Consultar especies y razas</a></li>
-            <li><a href="./propietarios.php" class="link">Consultar propietarios</a></li>
-    </section>
-<main>
-    <a href="../procesos/logs/logout.php" class="Btn">
-  
-        <div class="text">Log Out</div>
+<nav class="menu" id="menu">
+        <div class="contenido_menu">
+            <img src="../media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
+
+            <li><a href="../vistas/consultas.php" class="link active">Consultas</a>
+            <li><a href="../vistas/dar_de_alta.php" class="link">Dar de alta</a>
+            <li><a href="../vistas/tienda.php" class="link">Tienda</a>
+                
+        </div>
+
+        
+    </nav>
+
+    <div class="boton_abrir_menu" id="boton">
+        <img src="../media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
+    </div>
+<main id="layout">
+    <a class="Btn" href="../procesos/logs/logout.php">
+    
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
+        
+        <div class="text">Logout</div>
     </a>
     <section>
         <h1>Especies y Razas</h1>
@@ -85,6 +94,7 @@ include('../servicios/conexion.php');
                     // Botón editar raza
                     if (!empty($row['id_raza'])) {
                         echo "<td><a href='../formularios/editar_raza.php?id_raza={$row['id_raza']}'><button>Editar</button></a></td>";
+                        echo "<td><a href='../procesos/delete/delete_raza.php?id_raza={$row['id_raza']}'><button>Eliminar</button></a></td>";
                     } else {
                         echo "<td>-</td>";
                     }
@@ -92,6 +102,7 @@ include('../servicios/conexion.php');
                     // Botón editar especie solo en la primera fila de esa especie
                     if ($mostrar_editar_especie) {
                         echo "<td><a href='../formularios/editar_especie.php?id_especie={$row['id_especie']}'><button>Editar</button></a></td>";
+                        echo "<td><a href='../procesos/delete/delete_especie.php?id_especie={$row['id_especie']}'><button>Eliminar</button></a></td>";
                         $ultima_especie_id = $row['id_especie'];
                     } else {
                         echo "<td></td>";

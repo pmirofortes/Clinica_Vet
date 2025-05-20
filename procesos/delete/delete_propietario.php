@@ -11,8 +11,8 @@ if (!isset($_SESSION['usuario'])) {
 
 include_once '../../servicios/conexion.php';
 
-if (isset($_POST['DNI']) ) {
-    $dni = $_POST['DNI'];
+if (isset($_GET['dni_dueno']) ) {
+    $dni = $_GET['dni_dueno'];
 
     // Eliminar propietario
     $sql = "DELETE FROM dueno WHERE dni_dueno='$dni'";
@@ -23,7 +23,7 @@ if (isset($_POST['DNI']) ) {
         exit();
     } else {
         echo "<script>alert('Error al eliminar el propietario');</script>";
-        echo "<script>window.location.href='../../formularios/editar_propietario.php';</script>";
+        echo "<script>window.location.href='../../vistas/propietarios.php';</script>";
         exit();
     }
 } else {

@@ -6,24 +6,22 @@ include_once '../../servicios/conexion.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../../vistas/login.php");
-    exit();
-}
+
 
 // Recibir datos del formulario
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'];
 $DNI = $_POST['DNI'];
 $fecha = $_POST['fecha'];
+$fechaActual = date("Y-m-d");
+$fecha_restar = date("Y");
 $telefono = $_POST['telefono'];
 $localidad = $_POST['localidad'];
 $mail = $_POST['mail'];
 $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
 
-if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $password, $confirmPassword)) {
+if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $password, $confirmPassword) && $nombre != null && $nombre != "" && strlen($nombre) > 2 && $apellidos != null && $apellidos != "" && $DNI != "" && $DNI != null && strlen($DNI) > 8 && strlen($DNI) <= 9 && preg_match('/[a-zA-Z]/', $DNI == 1) && $fecha != "" && $fecha != null && $telefono != "" && $telefono != null && strlen($telefono) == 9 && $localidad != "" && $localidad != null && $mail != "" && $mail != null && filter_var($mail, FILTER_VALIDATE_EMAIL) != false && $fecha <= $fechaActual && $fecha > ($fecha_restar - 100) && $password != null && $password != "" && $confirmPassword == $password) {
     // Verificar que las contraseñas coincidan
     if ($password !== $confirmPassword) {
         echo "<script>alert('Las contraseñas no coinciden');</script>";
@@ -51,6 +49,7 @@ if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $pass
         echo "<script>alert('Veterinario registrado exitosamente');</script>";
         session_start();
         $_SESSION['DNI'] = $DNI; // Guardar el DNI en la sesión
+        $_SESSION['usuario'] = $nombre; // Guardar el nombre en la sesión
         header("Location: ../../index.php");
         exit();
     } else {

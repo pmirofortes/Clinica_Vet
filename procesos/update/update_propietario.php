@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario'])) {
 
 include_once '../../servicios/conexion.php';
 
-if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['edad']) && isset($_POST['localidad']) && isset($_POST['telefono']) && isset($_POST['mail']) && isset($_POST['DNI_original'])) {
+if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['edad']) && isset($_POST['localidad']) && isset($_POST['telefono']) && isset($_POST['mail']) && isset($_POST['DNI_original']) && strlen($_POST['DNI']) > 7 && strlen($_POST['DNI']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['DNI']) == 1) && $_POST['nombre'] != null && $_POST['nombre'] != "" && $_POST['apellidos'] != null && $_POST['apellidos'] != "" && $_POST['edad'] != null && $_POST['edad'] != "" && $_POST['localidad'] != null && $_POST['localidad'] != "" && $_POST['telefono'] != null && $_POST['telefono'] != "" && strlen($telefono) == 9 && $_POST['mail'] != null && $_POST['mail'] != "" && filter_var($mail, FILTER_VALIDATE_EMAIL) != false && strlen($_POST['DNI_original']) > 7 && strlen($_POST['DNI_original']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['DNI_original']) == 1)) {
     $dni = $_POST['DNI'];
     $dni_original = $_POST['DNI_original'];
     $nombre = $_POST['nombre'];

@@ -20,7 +20,7 @@ $DNI_vet = $_POST['dni_vet'];
 $especie = $_POST['especie'];
 $raza = $_POST['raza'];
 
-if (isset($nombre) && isset($edad) && isset($peso) && isset($color) && isset($DNI_dueño) && isset($especie) && isset($raza) && isset($DNI_vet)) {
+if (isset($nombre) && isset($edad) && isset($peso) && isset($color) && isset($DNI_dueño) && isset($especie) && isset($raza) && isset($DNI_vet) && $nombre != "" && $nombre != null && strlen($nombre) != 0 && $edad != "" && $edad != null && $peso != "" && $peso != null && $color != "" && $color != null && $DNI_dueño != "" && $DNI_dueño != null && strlen($DNI_dueño) > 0 && strlen($DNI_dueño) <= 9 && (preg_match('/[a-zA-Z]/', $DNI_dueño) == 1) && $DNI_vet != "" && $DNI_vet != null && strlen($DNI_vet) > 0 && strlen($DNI_vet) <= 9 && (preg_match('/[a-zA-Z]/', $DNI_vet) == 1) && $especie != "" && $especie != null && $raza != "" && $raza != null ) {
     // COMPROBAR QUE NO EXISTE LA MASCOTA
     $sql = "SELECT * FROM animal WHERE nombre_animal = '$nombre' AND dni_dueno = '$DNI_dueño'";
     $resultado = mysqli_query($conn, $sql);
@@ -38,7 +38,7 @@ if (isset($nombre) && isset($edad) && isset($peso) && isset($color) && isset($DN
         }
     }
 } else {
-    echo "<script>alert('Por favor, complete todos los campos');</script>";
+    echo "<script>alert('Por favor, complete todos los campos.');</script>";
     echo "<script>window.location.href='../../formularios/registro_nueva_mascota.php';</script>";
 }
 

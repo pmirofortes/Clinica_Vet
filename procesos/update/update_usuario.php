@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['edad']) && isset($_POST['localidad']) && isset($_POST['telefono']) && isset($_POST['mail']) && isset($_POST['DNI_original'])) {
+if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['edad']) && isset($_POST['localidad']) && isset($_POST['telefono']) && isset($_POST['mail']) && isset($_POST['DNI_original']) && strlen($_POST['DNI']) > 7 && strlen($_POST['DNI']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['DNI']) == 1) && $_POST['nombre'] != null && $_POST['nombre'] != "" && $_POST['apellidos'] != null && $_POST['apellidos'] != "" && $_POST['edad'] != null && $_POST['edad'] != "" && $_POST['localidad'] != null && $_POST['localidad'] != "" && $_POST['telefono'] != null && $_POST['telefono'] != "" && strlen($_POST['telefono']) == 9 && $_POST['mail'] != null && $_POST['mail'] != "" && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) != false && strlen($_POST['DNI_original']) > 7 && strlen($_POST['DNI_original']) <= 9 && (preg_match('/[a-zA-Z]/', $_POST['DNI_original']) == 1)) {
     include_once '../../servicios/conexion.php';
 
     $dni = $_POST['DNI'];
@@ -39,7 +39,7 @@ if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']
             $sql_pass = "UPDATE veterinario SET password='$hashed' WHERE dni_veterinario='$dni_original'";
             mysqli_query($conn, $sql_pass);
         }
-        header("Location: ../../index.php");
+        header("Location: ../../vistas/veterinarios.php");
         exit();
     } else {
         echo "<script>alert('Error al actualizar el usuario');</script>";

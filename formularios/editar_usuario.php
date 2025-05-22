@@ -24,110 +24,9 @@ if (isset($_GET['dni_veterinario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar usuario</title>
-    <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
-     <style>
-        /* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color:rgb(75, 0, 141);
-    color: #333;
-    line-height: 1.6;
-    
-}
-
-/* ENCABEZADO */
-header h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #ffffff;
-}
-
-/* FORMULARIO */
-.form {
-    width: 50%;
-    background-color: #fff;
-    padding: 30px;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    border-radius: 10px;
-    margin-left: 25%;
-}
-
-.form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px;
-    margin-top: 3px;
-}
-
-.form input[type="text"],
-.form select, .form input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-
-
-.form input[type="submit"] {
-    background-color:rgb(132, 76, 175);
-    color: white;
-    padding: 12px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.form input[type="submit"]:hover {
-        background-color:rgb(85, 28, 129);
-}
-
-
-
-
-
-
-
-/* LAYOUT */
-#layout {
-    margin-left: 0;
-    transition: margin-left 0.3s ease;
-}
-
-.menu.open + .boton_abrir_menu + #layout {
-    margin-left: 250px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .form {
-        padding: 20px;
-    }
-
-    .contenido_menu li {
-        text-align: center;
-    }
-
-    .imagen_cruz {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-    </style>
+    <link rel="stylesheet" href="../front/forms.css">
+    <script src="../front/menu.js"></script>
+   
 </head>
 <body>
 
@@ -158,40 +57,40 @@ header h1 {
     </a>
 
     <form action="../procesos/update/update_usuario.php" method="POST">
-        <div class="inputGroup">
+        
             <input type="text" required="" name="DNI" id="DNI" value="<?php echo $veterinario['dni_veterinario']; ?>">
             <label for="DNI">DNI</label>
             <input type="hidden" required="" name="DNI_original" id="DNI_original" value="<?php echo $veterinario['dni_veterinario']; ?>">
-        </div>
+        
 
-        <div class="inputGroup">
+        
             <input type="text" required="" name="nombre" id="nombre" value="<?php echo $veterinario['nombre_veterinario']; ?>">
             <label for="nombre">Nombre</label>
-        </div>
-        <div class="inputGroup">
+        
+        
             <input type="text" required="" name="apellidos" id="apellidos" value="<?php echo $veterinario['apellidos_veterinario']; ?>">
             <label for="apellidos">Apellidos</label>
-        </div>
-        <div class="inputGroup">
+        
+        
             <input type="text" required="" name="edad" id="edad" value="<?php echo $veterinario['edad_veterinario']; ?>">
             <label for="edad">Edad</label>
-        </div>
-        <div class="inputGroup">
+        
+        
             <input type="text" required="" name="localidad" id="localidad" value="<?php echo $veterinario['localidad_veterinario']; ?>">
             <label for="Localidad">Localidad</label>
-        </div>
-        <div class="inputGroup">
+        
+        
             <input type="telf" required="" name="telefono" id="telefono" value="<?php echo $veterinario['telefono_veterinario']; ?>">
             <label for="telefono">Teléfono</label>
-        </div>
-        <div class="inputGroup">
+        
+        
             <input type="mail" required="" name="mail" id="mail" value="<?php echo $veterinario['correo_veterinario']; ?>">
             <label for="mail">Correo</label>
-        </div>
-        <div class="inputGroup">
-            <input type="password" name="password" id="password" placeholder="Nueva contraseña">
-            <label for="password">Nueva Contraseña</label>
-        </div>
+        
+        
+            <input type="password" name="password_veterinario" id="password_veterinario" placeholder="Nueva contraseña">
+            <label for="password_veterinario">Nueva Contraseña</label>
+        
         <button type="submit" class="form_button">
             <span class="button__text">Actualizar</span>
             <span class="button__icon">

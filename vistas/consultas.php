@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultas</title>
     <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <script src="../front/menu.js"></script>
 </head>
 <body id="opciones">
     <nav class="menu" id="menu">

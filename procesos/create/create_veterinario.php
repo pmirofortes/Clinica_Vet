@@ -18,7 +18,7 @@ $fecha_restar = date("Y");
 $telefono = $_POST['telefono'];
 $localidad = $_POST['localidad'];
 $mail = $_POST['mail'];
-$password = $_POST['password'];
+$password = $_POST['password_veterinario'];
 $confirmPassword = $_POST['confirmPassword'];
 
 if (
@@ -52,7 +52,7 @@ if (
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Insertar veterinario
-    $sql = "INSERT INTO veterinario (nombre_veterinario, apellidos_veterinario, dni_veterinario, edad_veterinario, telefono_veterinario, localidad_veterinario, correo_veterinario, password) 
+    $sql = "INSERT INTO veterinario (nombre_veterinario, apellidos_veterinario, dni_veterinario, edad_veterinario, telefono_veterinario, localidad_veterinario, correo_veterinario, password_veterinario) 
             VALUES ('$nombre', '$apellidos', '$DNI', '$fecha', '$telefono', '$localidad', '$mail', '$hashedPassword')";
 
     if (mysqli_query($conn, $sql)) {

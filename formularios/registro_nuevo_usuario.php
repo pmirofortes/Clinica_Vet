@@ -8,106 +8,10 @@ include('../servicios/conexion.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Veterinario</title>
-    <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <link rel="stylesheet" href="../front/forms.css">
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
-     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color:rgb(75, 0, 141);
-            color: #333;
-            line-height: 1.6;
-            
-        }
-
-        /* ENCABEZADO */
-        header h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            color: #ffffff;
-        }
-
-        /* FORMULARIO */
-        .form {
-            width: 50%;
-            background-color: #fff;
-            padding: 30px;
-            box-shadow: 0 0 10px rgb(255, 255, 255);
-            border-radius: 10px;
-            margin-left: 25%;
-        }
-
-        .form label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 3px;
-            margin-top: 3px;
-        }
-
-        .form input[type="text"],
-        .form select, .form input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-
-
-        .form input[type="submit"] {
-            background-color:rgb(132, 76, 175);
-            color: white;
-            padding: 12px 20px;
-            margin-top: 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .form input[type="submit"]:hover {
-                background-color:rgb(85, 28, 129);
-        }
-
-
-        /* LAYOUT */
-        #layout {
-            margin-left: 0;
-            transition: margin-left 0.3s ease;
-        }
-
-        .menu.open + .boton_abrir_menu + #layout {
-            margin-left: 250px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .form {
-                padding: 20px;
-            }
-
-            .contenido_menu li {
-                text-align: center;
-            }
-
-            .imagen_cruz {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
-    </style>
+     
 </head>
 <body>
     <nav class="menu" id="menu">
@@ -150,31 +54,41 @@ include('../servicios/conexion.php');
         <section class="form">
             <form action="../procesos/create/create_veterinario.php" method="post">
                 <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre"><br><br>
+                <input type="text" id="nombre" name="nombre" onblur = "verificarNombre()"><br><br>
+                <span id="errorNombre" class="error"></span><br>
                 
                 <label for="apellidos">Apellidos:</label><br>
-                <input type="text" id="apellidos" name="apellidos"><br><br>
+                <input type="text" id="apellidos" name="apellidos" onblur = "verificarApellidos()"><br><br>
+                <span id="errorApellidos" class="error"></span><br>
                 
                 <label for="DNI">DNI:</label><br>
-                <input type="text" id="DNI" name="DNI"><br><br>
+                <input type="text" id="dni" name="DNI" onblur= "verificarDNI()"><br><br>
+                <span id="dniError" class="error"></span><br>
 
                 <label for="fecha">Fecha de nacimiento:</label><br>
-                <input type="date" id="fecha" name="fecha"><br><br>
+                <input type="date" id="fecha" name="fecha" onblur = "verificarEdad()"><br><br>
+                <span id="errorFecha" class="error"></span><br>
 
                 <label for="telefono">Teléfono:</label><br>
-                <input type="text" id="telefono" name="telefono"><br><br>
+                <input type="text" id="telefono" name="telefono" onblur= "verificarTelefono()"><br><br>
+                <span id="errorTelefono" class="error"></span><br>
 
                 <label for="localidad">Localidad:</label><br>
-                <input type="text" id="localidad" name="localidad"><br><br>
+                <input type="text" id="localidad" name="localidad" onblur = "verificarLocalidad()"><br><br>
+                <span id="errorLocalidad" class="error"></span><br>
                 
                 <label for="mail">Correo:</label><br>
-                <input type="mail" id="mail" name="mail"><br><br>
+                <input type="mail" id="email" name="mail" onblur="verificarEmail()"><br><br>
+                <span id="errorMail" class="error"></span><br>
+                
 
-                <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="password"><br><br>
+                <label for="password_veterinario">Contraseña:</label><br>
+                <input type="password" id="password" name="password_veterinario" onblur= "verificarPasswd()"><br><br>
+                <span id="errorPassword" class="error"></span><br>
 
                 <label for="confirmPassword">Repite la contraseña:</label><br>
-                <input type="password" id="confirmPassword" name="confirmPassword"><br><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" onblur= "verificarConfirmPasswd()"><br><br>
+                <span id="errorConfirmPassword" class="error"></span><br>
 
                 <input type="submit" value="Registrar Propietario">
 

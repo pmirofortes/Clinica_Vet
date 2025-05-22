@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: ../vistas/login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['usuario'])) {
+//     header("Location: ../vistas/login.php");
+//     exit();
+// }
 include('../servicios/conexion.php');
 ?>
 
@@ -13,111 +13,9 @@ include('../servicios/conexion.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de propietario</title>
-    <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <link rel="stylesheet" href="../front/forms.css">
+    <script src="../front/menu.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
-     <style>
-        /* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color:rgb(75, 0, 141);
-    color: #333;
-    line-height: 1.6;
-    
-}
-
-/* ENCABEZADO */
-header h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #ffffff;
-}
-
-/* FORMULARIO */
-.form {
-    width: 50%;
-    background-color: #fff;
-    padding: 30px;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    border-radius: 10px;
-    margin-left: 25%;
-}
-
-.form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px;
-    margin-top: 3px;
-}
-
-.form input[type="text"],
-.form select, .form input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-
-
-.form input[type="submit"] {
-    background-color:rgb(132, 76, 175);
-    color: white;
-    padding: 12px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.form input[type="submit"]:hover {
-        background-color:rgb(85, 28, 129);
-}
-
-
-
-
-
-
-
-/* LAYOUT */
-#layout {
-    margin-left: 0;
-    transition: margin-left 0.3s ease;
-}
-
-.menu.open + .boton_abrir_menu + #layout {
-    margin-left: 250px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .form {
-        padding: 20px;
-    }
-
-    .contenido_menu li {
-        text-align: center;
-    }
-
-    .imagen_cruz {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-    </style>
 </head>
 <body>
     <nav class="menu" id="menu">
@@ -160,19 +58,24 @@ header h1 {
         <section class="form">
             <form action="../procesos/create/create_propietario.php" method="post">
                 <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre"><br><br>
+                <input type="text" id="nombre" name="nombre" onblur="verificarNombre()"><br><br>
+                <span><p id="errorNombre" class="error"></p>
                 
                 <label for="apellidos">Apellidos:</label><br>
-                <input type="text" id="apellidos" name="apellidos"><br><br>
+                <input type="text" id="apellidos" name="apellidos" onblur= "verificarApellidos()"><br><br>
+                <span><p id="errorApellidos" class="error"></p>
                 
                 <label for="DNI">DNI:</label><br>
-                <input type="text" id="DNI" name="DNI"><br><br>
+                <input type="text" id="DNI" name="DNI" onblur= "verificarDNI()"><br><br>
+                <span><p id="errorDNI" class="error"></p>
 
                 <label for="fecha">Fecha de nacimiento:</label><br>
-                <input type="date" id="fecha" name="fecha"><br><br>
+                <input type="date" id="fecha" name="fecha" onblur="verificarApellidos()"><br><br>
+                <span><p id="errorFecha" class="error"></p>
 
                 <label for="telefono">Teléfono:</label><br>
-                <input type="text" id="telefono" name="telefono"><br><br>
+                <input type="text" id="telefono" name="telefono" onblur="verificarTelefono()"><br><br>
+                <span><p id="errorTelefono" class="error"></p>
 
                 <label for="localidad">Localidad:</label><br>
                 <input type="text" id="localidad" name="localidad"><br><br>

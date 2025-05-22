@@ -29,7 +29,7 @@ $filtroTipo = isset($_GET['tipo']) ? htmlspecialchars($_GET['tipo']) : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos Veterinaria</title>
     <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <script src="../front/menu.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;

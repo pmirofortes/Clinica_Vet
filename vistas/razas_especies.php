@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: ./login.php");
@@ -18,8 +15,84 @@ include('../servicios/conexion.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Especies y Razas</title>
     <link rel="stylesheet" href="../front/estilos.css">
-    <script src="../front/validar.js"></script>
+    <script src="../front/menu.js"></script>
+
+    <style>
+
+    h1{
+        margin-left: 15%;
+    }
+
+        /* Estilos generales del formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilos para los campos de texto */
+input[type="text"] {
+    border: 2px solid purple; /* Borde morado */
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%; /* Asegura que los campos llenen el ancho del formulario */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 14px;
+    transition: border-color 0.3s ease; /* Transición suave */
+}
+
+/* Cambiar el borde a morado más oscuro al hacer focus en los campos */
+input[type="text"]:focus {
+    border-color: #800080; /* Color morado más oscuro */
+    outline: none; /* Quitar el borde de enfoque por defecto */
+}
+
+/* Estilos para el botón "Filtrar" */
+button[type="submit"] {
+    background-color: purple; /* Fondo morado */
+    color: white; /* Texto blanco */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover en el botón "Filtrar" */
+button[type="submit"]:hover {
+    background-color: #800080; /* Fondo morado más oscuro cuando pasa el mouse */
+}
+
+/* Estilos para el botón "Quitar filtros" */
+button[type="button"] {
+    background-color: #E0B0FF; /* Morado claro */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover en el botón "Quitar filtros" */
+button[type="button"]:hover {
+    background-color: #D8A7FF; /* Tono morado más oscuro al hacer hover */
+}
+
+/* Estilos para los placeholders */
+input[type="text"]::placeholder {
+    color: purple; /* Color morado para el texto del placeholder */
+    opacity: 0.7; /* Hacer que el placeholder sea un poco más tenue */
+}
+    </style>
 </head>
+
+
 <body>
 
 <nav class="menu" id="menu">
@@ -29,10 +102,7 @@ include('../servicios/conexion.php');
             <li><a href="../vistas/consultas.php" class="link active">Consultas</a>
             <li><a href="../vistas/dar_de_alta.php" class="link">Dar de alta</a>
             <li><a href="../vistas/tienda.php" class="link">Tienda</a>
-                
         </div>
-
-        
     </nav>
 
     <div class="boton_abrir_menu" id="boton">
@@ -40,13 +110,43 @@ include('../servicios/conexion.php');
     </div>
 <main id="layout">
     <a class="Btn" href="../procesos/logs/logout.php">
-    
         <div class="sign"><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
-        
         <div class="text">Logout</div>
     </a>
     <section>
         <h1>Especies y Razas</h1>
+
+        <!-- FILTROS POR ESPECIE Y CLASIFICACIÓN -->
+        <form method="get" style="margin-bottom:20px; display:flex; gap:1rem; align-items:center;">
+            <label for="filtro_especie">Filtrar por especie:</label>
+            <select name="filtro_especie" id="filtro_especie">
+                <option value="">Todas</option>
+                <?php
+                $sqlEspecies = "SELECT id_especie, nombre_especie FROM especie";
+                $resEspecies = mysqli_query($conn, $sqlEspecies);
+                while ($esp = mysqli_fetch_assoc($resEspecies)) {
+                    $selected = (isset($_GET['filtro_especie']) && $_GET['filtro_especie'] == $esp['id_especie']) ? 'selected' : '';
+                    echo "<option value='{$esp['id_especie']}' $selected>{$esp['nombre_especie']}</option>";
+                }
+                ?>
+            </select>
+
+            <label for="filtro_clasificacion">Clasificación:</label>
+            <select name="filtro_clasificacion" id="filtro_clasificacion">
+                <option value="">Todas</option>
+                <?php
+                $clasificaciones = ['mamifero', 'pez', 'invertebrado', 'ave', 'reptil', 'amfibio'];
+                foreach ($clasificaciones as $clasif) {
+                    $selected = (isset($_GET['filtro_clasificacion']) && $_GET['filtro_clasificacion'] == $clasif) ? 'selected' : '';
+                    echo "<option value='$clasif' $selected>$clasif</option>";
+                }
+                ?>
+            </select>
+
+            <button type="submit">Filtrar</button>
+            <a href="razas_especies.php"><button type="button">Quitar filtro</button></a>
+        </form>
+
         <table>
             <tr>
                 <th>Especie</th>
@@ -58,6 +158,21 @@ include('../servicios/conexion.php');
             </tr>
 
             <?php
+            // Filtros dinámicos
+            $where = [];
+            if (!empty($_GET['filtro_especie'])) {
+                $id_filtro = intval($_GET['filtro_especie']);
+                $where[] = "especie.id_especie = $id_filtro";
+            }
+            if (!empty($_GET['filtro_clasificacion'])) {
+                $clasif = mysqli_real_escape_string($conn, $_GET['filtro_clasificacion']);
+                $where[] = "especie.clasif_especie = '$clasif'";
+            }
+            $where_sql = '';
+            if ($where) {
+                $where_sql = "WHERE " . implode(' AND ', $where);
+            }
+
             $sql = "
                 SELECT 
                     especie.id_especie, 
@@ -68,6 +183,7 @@ include('../servicios/conexion.php');
                     raza.nombre_raza 
                 FROM especie
                 LEFT JOIN raza ON especie.id_especie = raza.id_especie
+                $where_sql
                 ORDER BY especie.id_especie, raza.nombre_raza
             ";
 

@@ -56,7 +56,8 @@ create table veterinario (
     edad_veterinario int(2) NULL,
     localidad_veterinario varchar(85) NULL,
     telefono_veterinario char (9) NULL,
-    correo_veterinario varchar (35) NULL
+    correo_veterinario varchar (35) NULL,
+    password_veterinario varchar (30) NOT NULL
 );
 
 alter table animal

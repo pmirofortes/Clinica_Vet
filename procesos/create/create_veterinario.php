@@ -21,7 +21,17 @@ $mail = $_POST['mail'];
 $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
 
-if (isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $password, $confirmPassword) && $nombre != null && $nombre != "" && strlen($nombre) > 2 && $apellidos != null && $apellidos != "" && $DNI != "" && $DNI != null && strlen($DNI) > 8 && strlen($DNI) <= 9 && preg_match('/[a-zA-Z]/', $DNI == 1) && $fecha != "" && $fecha != null && $telefono != "" && $telefono != null && strlen($telefono) == 9 && $localidad != "" && $localidad != null && $mail != "" && $mail != null && filter_var($mail, FILTER_VALIDATE_EMAIL) != false && $fecha <= $fechaActual && $fecha > ($fecha_restar - 100) && $password != null && $password != "" && $confirmPassword == $password) {
+if (
+    isset($nombre, $apellidos, $DNI, $fecha, $telefono, $localidad, $mail, $password, $confirmPassword) &&
+    $nombre != "" && strlen($nombre) > 2 &&
+    $apellidos != "" &&
+    $DNI != "" && strlen($DNI) == 9 && preg_match('/[a-zA-Z]/', $DNI) == 1 &&
+    $fecha != "" && $fecha <= $fechaActual && $fecha > ($fecha_restar - 100) &&
+    $telefono != "" && strlen($telefono) == 9 &&
+    $localidad != "" &&
+    $mail != "" && filter_var($mail, FILTER_VALIDATE_EMAIL) &&
+    $password != "" && $confirmPassword == $password
+) {
     // Verificar que las contraseñas coincidan
     if ($password !== $confirmPassword) {
         echo "<script>alert('Las contraseñas no coinciden');</script>";

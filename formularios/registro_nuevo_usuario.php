@@ -13,104 +13,99 @@ include('../servicios/conexion.php');
     <link rel="icon" href="../media/favicon.png" type="image/png">
      <style>
         /* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    background-color:rgb(75, 0, 141);
-    color: #333;
-    line-height: 1.6;
-    
-}
+        body {
+            background-color:rgb(75, 0, 141);
+            color: #333;
+            line-height: 1.6;
+            
+        }
 
-/* ENCABEZADO */
-header h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #ffffff;
-}
+        /* ENCABEZADO */
+        header h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #ffffff;
+        }
 
-/* FORMULARIO */
-.form {
-    width: 50%;
-    background-color: #fff;
-    padding: 30px;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    border-radius: 10px;
-    margin-left: 25%;
-}
+        /* FORMULARIO */
+        .form {
+            width: 50%;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgb(255, 255, 255);
+            border-radius: 10px;
+            margin-left: 25%;
+        }
 
-.form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px;
-    margin-top: 3px;
-}
+        .form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
 
-.form input[type="text"],
-.form select, .form input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-
-
-.form input[type="submit"] {
-    background-color:rgb(132, 76, 175);
-    color: white;
-    padding: 12px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.form input[type="submit"]:hover {
-        background-color:rgb(85, 28, 129);
-}
+        .form input[type="text"],
+        .form select, .form input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
 
 
 
+        .form input[type="submit"] {
+            background-color:rgb(132, 76, 175);
+            color: white;
+            padding: 12px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .form input[type="submit"]:hover {
+                background-color:rgb(85, 28, 129);
+        }
 
 
+        /* LAYOUT */
+        #layout {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
 
+        .menu.open + .boton_abrir_menu + #layout {
+            margin-left: 250px;
+        }
 
-/* LAYOUT */
-#layout {
-    margin-left: 0;
-    transition: margin-left 0.3s ease;
-}
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .form {
+                padding: 20px;
+            }
 
-.menu.open + .boton_abrir_menu + #layout {
-    margin-left: 250px;
-}
+            .contenido_menu li {
+                text-align: center;
+            }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .form {
-        padding: 20px;
-    }
-
-    .contenido_menu li {
-        text-align: center;
-    }
-
-    .imagen_cruz {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
+            .imagen_cruz {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
 
     </style>
 </head>

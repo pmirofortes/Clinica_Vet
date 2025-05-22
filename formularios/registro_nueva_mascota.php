@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 include('../servicios/conexion.php');
-$dni_vet = $_SESSION['dni'];
+$dni_vet = $_SESSION['DNI'];
 
 
 // Cargar especies

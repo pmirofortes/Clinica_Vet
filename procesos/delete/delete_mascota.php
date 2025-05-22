@@ -31,15 +31,16 @@ $sql = "SELECT * FROM animal WHERE id_animal = $id_animal";
             window.location.href='../../index.php?msg=1';
         </script>";
         exit();
+        } else {
+            echo "<script>alert('Error al eliminar la mascota');</script>";
+            echo "<script>window.location.href='../../index.php?msg=0';</script>";
+            exit();
+        }
     } else {
         echo "<script>alert('Error al eliminar la mascota');</script>";
         echo "<script>window.location.href='// filepath: vsls:/procesos/delete/delete_mascota.php../../index.php?msg=0';</script>";
         exit();
     }
-
-
-
-// despues eliminar el animal
 
 
 ?>

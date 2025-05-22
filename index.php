@@ -18,6 +18,94 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="./front/estilos.css">
     <script src="./front/validar.js"></script>
     <link rel="icon" href="./front/media/favicon.png" type="image/png">
+    <style>
+        /* front/estilos.css */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f9f9;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Layout principal */
+        .layout {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Tabla de mascotas */
+        table {
+            width: 95%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #e0f2f1;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background-color: #f1f8e9;
+            transition: background-color 0.3s ease;
+        }
+
+        a {
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+
+
+
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 0.85rem;
+            }
+
+            .Btn {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+    </style>
 </head>
 <body>
 
@@ -29,6 +117,120 @@ if (!isset($_SESSION['usuario'])) {
     <div class="layout" id="layout">
         <header>
             <h1>Consulta de mascotas</h1>
+            <div class="filters-container">
+        <form action="vista.php" method="get" class="caja_form">
+            <!-- Filtro de regiones -->
+            <label for="region">Región:</label>
+            <select name="region" id="region">
+                <option value="">Seleccionar región</option>
+                <?php
+                $sql = "SELECT id, nombre_region FROM regiones";
+                $result = mysqli_query($conn, $sql);
+                $listaRegiones = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                foreach ($listaRegiones as $region) {
+                    $selected = (isset($_GET['region']) && $_GET['region'] == $region['id']) ? 'selected' : '';
+                    echo "<option value='{$region['id']}' $selected>{$region['nombre_region']}</option>";
+                }
+                ?>
+            </select>
+
+            <!-- Filtro de tipos -->
+            <label for="tipo">Tipo:</label>
+            <select name="tipo" id="tipo">
+                <option value="">Seleccionar tipo</option>
+                <?php
+                $sql = "SELECT id, nombre_tipo FROM tipos";
+                $result = mysqli_query($conn, $sql);
+                $listaTipos = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                foreach ($listaTipos as $tipo) {
+                    $selected = (isset($_GET['tipo']) && $_GET['tipo'] == $tipo['id']) ? 'selected' : '';
+                    echo "<option value='{$tipo['id']}' $selected>{$tipo['nombre_tipo']}</option>";
+                }
+                ?>
+            </select>
+
+            <!-- Filtro de ataques -->
+            <label for="ataque">Ataque:</label>
+            <select name="ataque" id="ataque">
+                <option value="">Seleccionar ataque</option>
+                <?php
+                $sql = "SELECT id, nombre_ataque FROM ataques";
+                $result = mysqli_query($conn, $sql);
+                $listaAtaques = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                foreach ($listaAtaques as $ataque) {
+                    $selected = (isset($_GET['ataque']) && $_GET['ataque'] == $ataque['id']) ? 'selected' : '';
+                    echo "<option value='{$ataque['id']}' $selected>{$ataque['nombre_ataque']}</option>";
+                }
+                ?>
+            </select>
+
+            <!-- Botón para aplicar filtros -->
+            <button type="submit">Filtrar</button>
+            <a href="vista.php"><button type="button">Quitar filtros</button></a>
+        </form>
+    </div>
+
+    <div class="filter-info">
+        <?php
+        $where = [];
+        $join = [];
+
+        if (!empty($_GET['region'])) {
+            $region = intval($_GET['region']); // Sanitización
+            $where[] = "p.id_region = $region";
+            echo "<b>Filtrado por región</b> ";
+        }
+
+        if (!empty($_GET['tipo'])) {
+            $tipo = intval($_GET['tipo']); // Sanitización
+            $join[] = "INNER JOIN pokemon_tipos pt ON p.id = pt.id_pokemon";
+            $where[] = "pt.id_tipo = $tipo";
+            echo "<b>Filtrado por tipo</b> ";
+        }
+
+        if (!empty($_GET['ataque'])) {
+            $ataque = intval($_GET['ataque']); // Sanitización
+            $join[] = "INNER JOIN pokemon_ataques pa ON p.id = pa.id_pokemon";
+            $where[] = "pa.id_ataque = $ataque";
+            echo "<b>Filtrado por ataque</b> ";
+        }
+        ?>
+    </div>
+
+    <div class="container">
+        <?php
+        // Construcción de la consulta dinámica
+        $sql = "SELECT DISTINCT p.* FROM pokemons p";
+
+        // JOINs
+        if (!empty($join)) {
+            $sql .= " " . implode(" ", $join);
+        }
+
+        // WHERE
+        if (!empty($where)) {
+            $sql .= " WHERE " . implode(" AND ", $where);
+        }
+
+        // Ordenar por ID para mantener el orden original
+        $sql .= " ORDER BY p.id";
+
+        $result = mysqli_query($conn, $sql);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $listaPokemons = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            foreach ($listaPokemons as $pokemon) {
+                echo "<div class='three-column'>
+                <h1>{$pokemon['nombre']}</h1>
+                <h4>{$pokemon['id']}</h4>
+                <img src='{$pokemon['img']}' alt='{$pokemon['nombre']}'>
+                <br>
+                <a href='../processes/eliminar.php?id={$pokemon['id']}' class='btnpokemon' onclick='confirmacion()'>Eliminar</a>
+                <a href='../processes/modificar.php?id={$pokemon['id']}' class='btnpokemon'>Modificar</a>
+                </div>";
+            }
+        }
+        ?>
+    </div>
         </header>
 
 
@@ -101,8 +303,10 @@ if (!isset($_SESSION['usuario'])) {
                         echo "<td><a href='./vistas/propietarios.php?dni={$animal['dni_dueno']}'>{$animal['dni_dueno']}</a></td>";
                         echo "<td>{$animal['nombre_especie']}</td>";
                         echo "<td>{$animal['nombre_raza']}</td>";
-                        echo "<td><a href='./formularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a></td>";
-                        echo "<td><a href='./procesos/delete/delete_mascota.php?id_animal=" . $animal['id_animal'] . "'> Eliminar </a></td>";
+                        echo "<td>";
+                        echo "<a href='./formularios/editar_mascota.php?id_animal=" . $animal['id_animal'] . "'> Editar </a>";
+                        echo "<a href='./procesos/delete/delete_mascota.php?id_animal=" . $animal['id_animal'] . "'> Eliminar </a>";
+                        echo "</td>";
                         echo "</tr>";
 
                     }

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: ./login.php");
@@ -17,102 +16,63 @@ include('../servicios/conexion.php');
     <title>Propietarios</title>
     <link rel="stylesheet" href="../front/estilos.css">
     <script src="../front/menu.js"></script>
-
     <style>
-
-    h1{
-        margin-left: 15%;
-    }
-
-        /* Estilos generales del formulario */
-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9; /* Fondo gris claro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-/* Estilos para los campos de texto */
-input[type="text"] {
-    border: 2px solid purple; /* Borde morado */
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%; /* Asegura que los campos llenen el ancho del formulario */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 14px;
-    transition: border-color 0.3s ease; /* Transición suave */
-}
-
-/* Cambiar el borde a morado más oscuro al hacer focus en los campos */
-input[type="text"]:focus {
-    border-color: #800080; /* Color morado más oscuro */
-    outline: none; /* Quitar el borde de enfoque por defecto */
-}
-
-/* Estilos para el botón "Filtrar" */
-button[type="submit"] {
-    background-color: purple; /* Fondo morado */
-    color: white; /* Texto blanco */
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-/* Efecto hover en el botón "Filtrar" */
-button[type="submit"]:hover {
-    background-color: #800080; /* Fondo morado más oscuro cuando pasa el mouse */
-}
-
-/* Estilos para el botón "Quitar filtros" */
-button[type="button"] {
-    background-color: #E0B0FF; /* Morado claro */
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-/* Efecto hover en el botón "Quitar filtros" */
-button[type="button"]:hover {
-    background-color: #D8A7FF; /* Tono morado más oscuro al hacer hover */
-}
-
-/* Estilos para los placeholders */
-input[type="text"]::placeholder {
-    color: purple; /* Color morado para el texto del placeholder */
-    opacity: 0.7; /* Hacer que el placeholder sea un poco más tenue */
-}
+        h1 { margin-left: 15%; }
+        form {
+            max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;
+            border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            border: 2px solid purple; padding: 10px; margin: 10px 0;
+            width: 100%; border-radius: 5px; font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #800080; outline: none;
+        }
+        button[type="submit"] {
+            background-color: purple; color: white; padding: 12px 20px;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 16px; transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #800080;
+        }
+        button[type="button"] {
+            background-color: #E0B0FF; color: white; padding: 12px 20px;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 16px; transition: background-color 0.3s ease;
+        }
+        button[type="button"]:hover {
+            background-color: #D8A7FF;
+        }
+        input[type="text"]::placeholder {
+            color: purple; opacity: 0.7;
+        }
     </style>
-
 </head>
 <body>
 <nav class="menu" id="menu">
-        <div class="contenido_menu">
-            <img src="../media/cross.svg" alt="No se ha podido cargar la imagen" class="imagen_cruz" onclick="cerrarmenu()">
-
-            <li><a href="../vistas/consultas.php" class="link active">Consultas</a>
-            <li><a href="../vistas/dar_de_alta.php" class="link">Dar de alta</a>
-            <li><a href="../vistas/tienda.php" class="link">Tienda</a>
-        </div>
-    </nav>
-
-    <div class="boton_abrir_menu" id="boton">
-        <img src="../media/menu.svg" alt="No se ha podido cargar la imagen" onclick="abrirmenu()">
+    <div class="contenido_menu">
+        <img src="../media/cross.svg" alt="Cerrar menú" class="imagen_cruz" onclick="cerrarmenu()">
+        <li><a href="../vistas/consultas.php" class="link active">Consultas</a>
+        <li><a href="../vistas/dar_de_alta.php" class="link">Dar de alta</a>
+        <li><a href="../vistas/tienda.php" class="link">Tienda</a>
     </div>
+</nav>
+
+<div class="boton_abrir_menu" id="boton">
+    <img src="../media/menu.svg" alt="Abrir menú" onclick="abrirmenu()">
+</div>
 
 <main id="layout">
     <a class="Btn" href="../procesos/logs/logout.php">
-        <div class="sign"><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
+        <div class="sign">
+            <svg viewBox="0 0 512 512"><path d="..."></path></svg>
+        </div>
         <div class="text">Logout</div>
     </a>
+
     <section>
         <h1>Consulta de Propietarios</h1>
 
@@ -141,47 +101,54 @@ input[type="text"]::placeholder {
             </tr>
 
             <?php
-            // Filtros dinámicos SIN consultas preparadas ni splat ni referencias
             $where = [];
             if (isset($_GET['nombre'])) {
-                $nombre = ($_GET['nombre']);
+                $nombre = $_GET['nombre'];
                 $where[] = "nombre_dueno LIKE '%$nombre%'";
             }
             if (isset($_GET['apellidos'])) {
-                $apellidos = ($_GET['apellidos']);
+                $apellidos = $_GET['apellidos'];
                 $where[] = "apellidos_dueno LIKE '%$apellidos%'";
             }
             if (isset($_GET['dni'])) {
-                $dni = ($_GET['dni']);
+                $dni = $_GET['dni'];
                 $where[] = "dni_dueno LIKE '%$dni%'";
             }
             if (isset($_GET['localidad'])) {
-                $localidad = ($_GET['localidad']);
+                $localidad = $_GET['localidad'];
                 $where[] = "localidad_dueno LIKE '%$localidad%'";
             }
             if (isset($_GET['telefono'])) {
-                $telefono = ($_GET['telefono']);
+                $telefono = $_GET['telefono'];
                 $where[] = "telefono_dueno LIKE '%$telefono%'";
             }
             if (isset($_GET['correo'])) {
-                $correo = ($_GET['correo']);
+                $correo = $_GET['correo'];
                 $where[] = "correo_dueno LIKE '%$correo%'";
             }
-            $where_sql = '';
-            if ($where) {
-                $where_sql = "WHERE " . implode(' AND ', $where);
-            }
+
+            $where_sql = $where ? "WHERE " . implode(' AND ', $where) : "";
 
             $sql = "SELECT * FROM dueno $where_sql ORDER BY nombre_dueno";
             $result = mysqli_query($conn, $sql);
 
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    // Calcular la edad a partir de la fecha de nacimiento
+                    $edad = '';
+                    if (!empty($row['fecha_nacimiento'])) {
+                        $fecha_nac = new DateTime($row['fecha_nacimiento']);
+                        $hoy = new DateTime();
+                        $edad = $fecha_nac->diff($hoy)->y;
+                    } else {
+                        $edad = 'Desconocida';
+                    }
+
                     echo "<tr>";
                     echo "<td>{$row['nombre_dueno']}</td>";
                     echo "<td>{$row['apellidos_dueno']}</td>";
                     echo "<td>{$row['dni_dueno']}</td>";
-                    echo "<td>{$row['edad_dueno']}</td>";
+                    echo "<td>$edad</td>";
                     echo "<td>{$row['localidad_dueno']}</td>";
                     echo "<td>{$row['telefono_dueno']}</td>";
                     echo "<td>{$row['correo_dueno']}</td>";

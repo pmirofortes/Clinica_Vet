@@ -15,6 +15,7 @@ include('../servicios/conexion.php');
     <title>Registro de propietario</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
 </head>
 <body>
@@ -56,36 +57,37 @@ include('../servicios/conexion.php');
             <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
     </section>
         <section class="form">
-            <form action="../procesos/create/create_propietario.php" method="post">
-                <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" onblur="verificarNombre()"><br><br>
-                <span><p id="errorNombre" class="error"></p>
-                
-                <label for="apellidos">Apellidos:</label><br>
-                <input type="text" id="apellidos" name="apellidos" onblur= "verificarApellidos()"><br><br>
-                <span><p id="errorApellidos" class="error"></p>
-                
-                <label for="DNI">DNI:</label><br>
-                <input type="text" id="DNI" name="DNI" onblur= "verificarDNI()"><br><br>
-                <span><p id="errorDNI" class="error"></p>
+<form action="../procesos/create/create_propietario.php" method="post">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" onblur="verificarNombre()">
+    <span id="errorNombre" class="error"></span><br><br>
+    
+    <label for="apellidos">Apellidos:</label><br>
+    <input type="text" id="apellidos" name="apellidos" onblur="verificarApellidos()">
+    <span id="errorApellidos" class="error"></span><br><br>
+    
+    <label for="DNI">DNI:</label><br>
+    <input type="text" id="dni" name="DNI" onblur="verificarDNI()">
+    <span id="dniError" class="error"></span><br><br>
 
-                <label for="fecha">Fecha de nacimiento:</label><br>
-                <input type="date" id="fecha" name="fecha" onblur="verificarApellidos()"><br><br>
-                <span><p id="errorFecha" class="error"></p>
+    <label for="fecha">Fecha de nacimiento:</label><br>
+    <input type="date" id="fecha" name="fecha" onblur="verificarEdad()">
+    <span id="errorFecha" class="error"></span><br><br>
 
-                <label for="telefono">Teléfono:</label><br>
-                <input type="text" id="telefono" name="telefono" onblur="verificarTelefono()"><br><br>
-                <span><p id="errorTelefono" class="error"></p>
+    <label for="telefono">Teléfono:</label><br>
+    <input type="text" id="telefono" name="telefono" onblur="verificarTelefono()">
+    <span id="errorTelefono" class="error"></span><br><br>
 
-                <label for="localidad">Localidad:</label><br>
-                <input type="text" id="localidad" name="localidad"><br><br>
-                
-                <label for="mail">Correo:</label><br>
-                <input type="mail" id="mail" name="mail"><br><br>
+    <label for="localidad">Localidad:</label><br>
+    <input type="text" id="localidad" name="localidad" onblur="verificarLocalidad()">
+    <span id="errorLocalidad" class="error"></span><br><br>
+    
+    <label for="mail">Correo:</label><br>
+    <input type="text" id="email" name="mail" onblur="verificarEmail()">
+    <span id="errorMail" class="error"></span><br><br>
 
-                <input type="submit" value="Registrar Propietario">
-
-            </form> 
+    <input type="submit" value="Registrar Propietario">
+</form>
         </section>
     </div> 
 </main>     

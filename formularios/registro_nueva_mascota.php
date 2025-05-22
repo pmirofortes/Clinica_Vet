@@ -22,6 +22,7 @@ $razasQuery = mysqli_query($conn, "SELECT id_raza, nombre_raza, id_especie FROM 
     <title>Registro de Mascota</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     
 </head>
 <body>
@@ -62,76 +63,56 @@ $razasQuery = mysqli_query($conn, "SELECT id_raza, nombre_raza, id_especie FROM 
 </section>
 
 <section class="form">
-    <form method="post" action="../procesos/create/create_mascota.php">
-        <label>Nombre:</label><br>
-        <input type="text" name="nombre"><br><br>
 
-        <label>Fecha nacimiento:</label><br>
-        <input type="date" name="edad"><br><br>
+<form method="post" action="../procesos/create/create_mascota.php">
+    <label>Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" onblur="verificarNombre()">
+    <span id="errorNombre" class="error"></span><br><br>
 
-        <label>Peso:</label><br>
-        <input type="number" name="peso"> kg<br><br>
+    <label>Fecha nacimiento:</label><br>
+    <input type="date" id="fecha" name="edad" onblur="verificarEdad()">
+    <span id="errorFecha" class="error"></span><br><br>
 
-        <label>Color:</label><br>
-        <input type="text" name="color"><br><br>
+    <label>Peso:</label><br>
+    <input type="text" id="peso" name="peso" onblur="pesoAnimal()">
+    <span id="errorPeso" class="error"></span><br><br>
 
-        <label>DNI Dueño:</label><br>
-        <input type="text" name="dni_dueño"><br><br>
+    <label>Color:</label><br>
+    <input type="text" id="color" name="color" onblur="verificarColor()">
+    <span id="errorColor" class="error"></span><br><br>
 
-        <label>DNI Veterinario:</label><br>
-        <input type="text" name="dni_vet" value="<?php echo $dni_vet; ?>"><br><br>
+    <label>DNI Dueño:</label><br>
+    <input type="text" id="dniDueno" name="dni_dueño" onblur="verificarDNIDueno()">
+    <span id="dniDuenoError" class="error"></span><br><br>
 
-        <label>Especie:</label><br>
-        <select name="especie" id="especie">
-            <option value="">Seleccionar especie</option>
-            <?php while ($esp = mysqli_fetch_assoc($especies)) : ?>
-                <option value="<?= $esp['id_especie'] ?>"><?= $esp['nombre_especie'] ?></option>
-            <?php endwhile; ?>
-        </select><br><br>
+    <label>DNI Veterinario:</label><br>
+    <input type="text" id="dniVete" name="dni_vet" value="<?php echo $dni_vet; ?>" onblur="verificarDNIVeterinario()">
+    <span id="dniVeteError" class="error"></span><br><br>
 
-        <label>Raza:</label><br>
-        <select name="raza" id="raza">
-            <option value="">Seleccionar raza</option>
-            <?php while ($r = mysqli_fetch_assoc($razasQuery)) : ?>
-                <option value="<?= $r['id_raza'] ?>" data-especie="<?= $r['id_especie'] ?>">
-                    <?= $r['nombre_raza'] ?>
-                </option>
-            <?php endwhile; ?>
-        </select><br><br>
+    <label>Especie:</label><br>
+    <select name="especie" id="especie" onblur="verificarEspecie()">
+        <option value="">Seleccionar especie</option>
+        <?php while ($esp = mysqli_fetch_assoc($especies)) : ?>
+            <option value="<?= $esp['id_especie'] ?>"><?= $esp['nombre_especie'] ?></option>
+        <?php endwhile; ?>
+    </select>
+    <span id="errorEspecie" class="error"></span><br><br>
 
-        <input type="submit" name="registrar_mascota" value="Registrar Mascota">
-    </form>
+    <label>Raza:</label><br>
+    <select name="raza" id="raza" onblur="verificarRaza()">
+        <option value="">Seleccionar raza</option>
+        <?php while ($r = mysqli_fetch_assoc($razasQuery)) : ?>
+            <option value="<?= $r['id_raza'] ?>" data-especie="<?= $r['id_especie'] ?>">
+                <?= $r['nombre_raza'] ?>
+            </option>
+        <?php endwhile; ?>
+    </select>
+    <span id="errorRaza" class="error"></span><br><br>
+
+    <input type="submit" name="registrar_mascota" value="Registrar Mascota">
+</form>
 </section>
 </div>
-
-<script>
-
-    var especieSelect = document.getElementById('especie');
-    var razaSelect = document.getElementById('raza');
-
-    // Guardamos todas las razas al inicio
-    var todasLasRazas = [];
-    for (var i = 0; i < razaSelect.options.length; i++) {
-        todasLasRazas.push(razaSelect.options[i]);
-    }
-
-    especieSelect.addEventListener('change', function () {
-        var especieId = especieSelect.value;
-
-        // Limpiar el select de razas
-        razaSelect.innerHTML = '<option value="">Seleccionar raza</option>';
-
-        // Recorrer todas las opciones y añadir solo las que coinciden
-        for (var i = 0; i < todasLasRazas.length; i++) {
-            var opt = todasLasRazas[i];
-            if (opt.getAttribute('data-especie') === especieId) {
-                razaSelect.appendChild(opt);
-            }
-        }
-    });
-
-
-</script>
 </main>
 </body>
 </html>

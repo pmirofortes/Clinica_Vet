@@ -35,6 +35,7 @@ if (isset($_GET['dni_dueno'])) {
     <title>Editar propietario</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
 
 </head>
@@ -63,7 +64,7 @@ if (isset($_GET['dni_dueno'])) {
         <div class="text">Logout</div>
     </a>
     <header>
-        <h1>Registro de Propietario</h1>
+        <h1>Editar de Propietario</h1>
     </header>
     <div class="layout">
        <section class="menu">
@@ -77,32 +78,39 @@ if (isset($_GET['dni_dueno'])) {
             <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
     </section>
         <section class="form">
+
             <form action="../procesos/update/update_propietario.php" method="post">
                 <label for="nombre">Nombre:</label><br>
-                <input type="text" id="nombre" name="nombre" value="<?= $propietario['nombre_dueno'] ?>"><br><br>
+                <input type="text" id="nombre" name="nombre" value="<?= $propietario['nombre_dueno'] ?>" onblur="verificarNombre()">
+                <span id="errorNombre" class="error"></span><br><br>
                 
                 <label for="apellidos">Apellidos:</label><br>
-                <input type="text" id="apellidos" name="apellidos" value="<?= $propietario['apellidos_dueno'] ?>"><br><br>
+                <input type="text" id="apellidos" name="apellidos" value="<?= $propietario['apellidos_dueno'] ?>" onblur="verificarApellidos()">
+                <span id="errorApellidos" class="error"></span><br><br>
                 
                 <label for="DNI">DNI:</label><br>
-                <input type="text" id="DNI" name="DNI" value="<?= $propietario['dni_dueno'] ?>"><br><br>
+                <input type="text" id="dni" name="DNI" value="<?= $propietario['dni_dueno'] ?>" onblur="verificarDNI()">
+                <span id="dniError" class="error"></span><br><br>
                 <input type="hidden" id="DNI_original" name="DNI_original" value="<?= $propietario['dni_dueno'] ?>"><br><br>
 
                 <label for="edad">Fecha de nacimiento:</label><br>
-                <input type="date" id="edad" name="edad" value="<?= $propietario['edad_dueno'] ?>"><br><br>
+                <input type="date" id="fecha" name="edad" value="<?= $propietario['edad_dueno'] ?>" onblur="verificarEdad()">
+                <span id="errorFecha" class="error"></span><br><br>
 
                 <label for="telefono">Teléfono:</label><br>
-                <input type="text" id="telefono" name="telefono" value="<?= $propietario['telefono_dueno'] ?>"><br><br>
+                <input type="text" id="telefono" name="telefono" value="<?= $propietario['telefono_dueno'] ?>" onblur="verificarTelefono()">
+                <span id="errorTelefono" class="error"></span><br><br>
 
                 <label for="localidad">Localidad:</label><br>
-                <input type="text" id="localidad" name="localidad" value="<?= $propietario['localidad_dueno'] ?>"><br><br>
+                <input type="text" id="localidad" name="localidad" value="<?= $propietario['localidad_dueno'] ?>" onblur="verificarLocalidad()">
+                <span id="errorLocalidad" class="error"></span><br><br>
                 
                 <label for="mail">Correo:</label><br>
-                <input type="mail" id="mail" name="mail" value="<?= $propietario['correo_dueno'] ?>"><br><br>
+                <input type="text" id="email" name="mail" value="<?= $propietario['correo_dueno'] ?>" onblur="verificarEmail()">
+                <span id="errorMail" class="error"></span><br><br>
 
                 <input type="submit" value="Registrar Propietario">
-
-            </form> 
+            </form>
         </section>
     </div>    
 </main>  

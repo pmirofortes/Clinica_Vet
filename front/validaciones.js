@@ -1,14 +1,3 @@
-function verificarNombre(){
-    let nombre= document.getElementById("name").value;
-    let errorNombre= document.getElementById("nameError");
-    if(nombre==null || nombre==""){
-        errorNombre.textContent= "El campo no puede estar vacio";
-        errorNombre.style.color="red";
-    }else{
-        errorNombre.textContent="";
-    }
-}
-
 function verificarEdad(){
     let edad= document.getElementById("age").value;
     let errorEdad= document.getElementById("ageError");
@@ -60,6 +49,7 @@ function pesoAnimal(){
     let errorPeso= document.getElementById("errorPeso");
     if(peso== null || peso==""){
         errorPeso.textContent="Campo vacio";
+        errorPeso.style.color="red";
     }else if(isNaN(peso)){
         errorPeso.textContent="Solo se permiten numeros";
         errorPeso.style.color="red";
@@ -196,17 +186,18 @@ function verificarEdad(){
 }
 
 function verificarLocalidad(){
-    let localidad= document.getElementById("localidad").value;
-    let errorLocalidad= document.getElementById("errorLocalidad");
-    let sinNumeros= /^\d+$/;
-    if(localidad==null || localidad==""){
-        errorLocalidad.textContent= "El campo no puede estar vacio";
-        errorLocalidad.style.color="red";
-    }else if(!sinNumeros.test(localidad)){
-        errorLocalidad.textContent= "No se permiten numeros";
-        errorLocalidad.style.color="red";
-    }else{
-        errorLocalidad.textContent="";
+    let localidad = document.getElementById("localidad").value;
+    let errorLocalidad = document.getElementById("errorLocalidad");
+    let contieneNumero = /\d/; // Cambiado: ahora verifica si hay algún número
+
+    if(localidad == null || localidad == ""){
+        errorLocalidad.textContent = "El campo no puede estar vacio";
+        errorLocalidad.style.color = "red";
+    } else if(contieneNumero.test(localidad)){
+        errorLocalidad.textContent = "No se permiten numeros";
+        errorLocalidad.style.color = "red";
+    } else {
+        errorLocalidad.textContent = "";
     }
 }
 
@@ -238,16 +229,6 @@ function verificarEmail(){
 }
 
 
-function verificarRaza(){
-    let raza= document.getElementById("raza").value;
-    let errorRaza= document.getElementById("razaError");
-    if(raza==null || raza==""){
-        errorRaza.textContent= "El campo no puede estar vacio";
-        errorRaza.style.color="red";
-    }else{
-        errorRaza.textContent="";
-    }
-}
 
 function verificarDNI(){
     let dni = document.getElementById("dni").value;
@@ -293,7 +274,7 @@ function verificarConfirmPasswd(){
 }
 
 function validarNombreEspecie(){
-    let nombre= document.getElementById("name").value;
+    let nombre= document.getElementById("nombre").value;
     let errorNombre= document.getElementById("errorNombre");
     if(nombre==null || nombre==""){
         errorNombre.textContent= "El campo no puede estar vacio";
@@ -304,7 +285,7 @@ function validarNombreEspecie(){
 }
 
 function validarNombreCientifico(){
-    let nombreCien= document.getElementById("nameCien").value;
+    let nombreCien= document.getElementById("nombre_cientifico").value;
     let errorNombreCien= document.getElementById("errorNombreCien");
     if(nombreCien==null || nombreCien==""){
         errorNombreCien.textContent= "El campo no puede estar vacio";

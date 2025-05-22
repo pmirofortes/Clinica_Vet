@@ -30,14 +30,12 @@ $sql = "SELECT * FROM especie WHERE id_especie = $id_especie";
         // elimina los animales relacionados
         $sql3 = "DELETE FROM animal WHERE id_especie = $id_especie";
         if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql2) && mysqli_query($conn, $sql3)) {
-            echo "<script>
-            alert('Especie eliminada correctamente');
-            window.location.href='../../index.php?msg=1';
-        </script>";
+        echo "<script>alert('Especie eliminada correctamente');</script>";
+        header('Location: ../../vistas/razas_especies.php');
         exit();
     } else {
         echo "<script>alert('Error al eliminar la especie');</script>";
-        echo "<script>window.location.href='// filepath: vsls:/procesos/delete/delete_especie.php../../index.php?msg=0';</script>";
+        header('Location: ../../vistas/razas_especies.php');
         exit();
     }
     }

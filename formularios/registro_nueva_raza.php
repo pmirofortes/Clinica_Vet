@@ -14,6 +14,7 @@ include('../servicios/conexion.php');
     <title>Registrar raza</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
     
 </head>
@@ -53,28 +54,30 @@ include('../servicios/conexion.php');
             <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
         </section>
         <section class="form">
-            <form action="../procesos/create/create_raza.php" method="post">
-                <label for="nombre_raza">Nombre raza:</label><br>
-                <input type="text" id="nombre_raza" name="nombre_raza" required><br><br>
-                
-                <label for="id_especie">Especie:</label><br>
-                <select name="id_especie" required>
-                    <option value="">Seleccionar especie</option>
-                    <?php
-                    $sql = "SELECT id_especie, nombre_especie FROM especie";
-                    $result = mysqli_query($conn, $sql);
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='" . $row['id_especie'] . "'>" . $row['nombre_especie'] . "</option>";
-                        }
-                    } else {
-                        echo "<option value=''>Error al cargar especies</option>";
-                    }
-                    ?>
-                </select><br><br>
-                <!-- Removed hidden id_raza input, not needed for new raza registration -->
-                <input type="submit" value="Registrar Raza">
-            </form> 
+<form action="../procesos/create/create_raza.php" method="post">
+    <label for="nombre_raza">Nombre raza:</label><br>
+    <input type="text" id="raza" name="nombre_raza" required onblur="verificarRaza()">
+    <span id="errorRaza" class="error"></span><br><br>
+    
+    <label for="id_especie">Especie:</label><br>
+    <select name="id_especie" id="especie" required onblur="verificarEspecie()">
+        <option value="">Seleccionar especie</option>
+        <?php
+        $sql = "SELECT id_especie, nombre_especie FROM especie";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value='" . $row['id_especie'] . "'>" . $row['nombre_especie'] . "</option>";
+            }
+        } else {
+            echo "<option value=''>Error al cargar especies</option>";
+        }
+        ?>
+    </select>
+    <span id="errorEspecie" class="error"></span><br><br>
+    <input type="submit" value="Registrar Raza">
+</form>
+
         </section>
     </div>    
     </main>  

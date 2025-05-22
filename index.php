@@ -19,6 +19,40 @@ include('./servicios/conexion.php');
     <link rel="stylesheet" href="./front/estilos.css">
     <script src="./front/menu.js"></script>
     <link rel="icon" href="./front/media/favicon.png" type="image/png">
+    <style>
+        h1 { margin-left: 15%; }
+        form {
+            max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;
+            border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], select {
+            border: 2px solid purple; padding: 10px; margin: 10px 0;
+            width: 100%; border-radius: 5px; font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #800080; outline: none;
+        }
+        button[type="submit"] {
+            background-color: purple; color: white; padding: 12px 20px;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 16px; transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #800080;
+        }
+        button[type="button"] {
+            background-color: #E0B0FF; color: white; padding: 12px 20px;
+            border: none; border-radius: 5px; cursor: pointer;
+            font-size: 16px; transition: background-color 0.3s ease;
+        }
+        button[type="button"]:hover {
+            background-color: #D8A7FF;
+        }
+        input[type="text"]::placeholder {
+            color: purple; opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
     <div class="layout" id="layout">
@@ -120,10 +154,6 @@ if($result && mysqli_num_rows($result) > 0){
             $hoy = time();
             // Calcular la diferencia en años
             $edad_anios = date('Y', $hoy) - date('Y', $fecha_nacimiento);
-            // Ajustar si aún no ha cumplido años este año
-            if (date('md', $hoy) < date('md', $fecha_nacimiento)) {
-                $edad_anios--;
-            }
             $edad = $edad_anios . ' años';
         } else {
             $edad = '';

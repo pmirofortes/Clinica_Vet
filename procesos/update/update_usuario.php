@@ -14,6 +14,7 @@ if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']
     $dni = $_POST['DNI'];
     $dni_original = $_POST['DNI_original'];
     $nombre = $_POST['nombre'];
+    $edad = $_POST['edad'];
     $apellidos = $_POST['apellidos'];
     $telefono = $_POST['telefono'];
     $localidad = $_POST['localidad'];
@@ -25,6 +26,7 @@ if (isset($_POST['DNI']) && isset($_POST['nombre']) && isset($_POST['apellidos']
         nombre_veterinario='$nombre', 
         apellidos_veterinario='$apellidos', 
         telefono_veterinario='$telefono', 
+        edad_veterinario='$edad',
         localidad_veterinario='$localidad', 
         correo_veterinario='$mail' 
         WHERE dni_veterinario='$dni_original'";

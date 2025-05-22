@@ -13,6 +13,7 @@ if (!isset($_SESSION['usuario'])) {
     <title>Registro de propietario</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
     
 </head>
@@ -55,27 +56,30 @@ if (!isset($_SESSION['usuario'])) {
             <li><a href="../vistas/propietarios.php" class="link">Consultar propietarios</a></li>
     </section>
         <section class="form">
-            <form action="../procesos/create/create_especie.php" method="post">
-                <label for="nombre">Nombre especie:</label><br>
-                <input type="text" id="nombre" name="nombre"><br><br>
-                
-                <label for="nombre_cientifico">Nombre científicio:</label><br>
-                <input type="text" id="nombre_cientifico" name="nombre_cientifico"><br><br>
-                
-                <label for="clas">Clasificación:</label><br>
-                <select name="clas">
-                    <option value="" disabled>Selecciona una especie</option>
-                    <option value="mamifero">mamifero</option>
-                    <option value="pez">pez</option>
-                    <option value="invertebrado">invertebrado</option>
-                    <option value="ave">ave</option>
-                    <option value="reptil">reptil</option>
-                    <option value="amfibio">amfibio</option>
-                </select><br><br>
+          
+<form action="../procesos/create/create_especie.php" method="post">
+    <label for="nombre">Nombre especie:</label><br>
+    <input type="text" id="nombre" name="nombre" onblur="validarNombreEspecie()">
+    <span id="errorNombre" class="error"></span><br><br>
+    
+    <label for="nombre_cientifico">Nombre científicio:</label><br>
+    <input type="text" id="nombre_cientifico" name="nombre_cientifico" onblur="validarNombreCientifico()">
+    <span id="errorNombreCien" class="error"></span><br><br>
+    
+    <label for="clas">Clasificación:</label><br>
+    <select name="clas" id="opcion" onblur="clasifEspecie()">
+        <option value="" disabled selected>Selecciona una especie</option>
+        <option value="mamifero">mamifero</option>
+        <option value="pez">pez</option>
+        <option value="invertebrado">invertebrado</option>
+        <option value="ave">ave</option>
+        <option value="reptil">reptil</option>
+        <option value="amfibio">amfibio</option>
+    </select>
+    <span id="errorSelect" class="error"></span><br><br>
 
-                <input type="submit" value="Registrar Especie">
-
-            </form> 
+    <input type="submit" value="Registrar Especie">
+</form>
         </section>
     </div>
 </main>      

@@ -32,6 +32,7 @@ if (isset($_GET['id_raza'])) {
     <title>Editar Raza</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
 </head>
 <body>
     <nav class="menu" id="menu">
@@ -63,10 +64,11 @@ if (isset($_GET['id_raza'])) {
         <input type="hidden" name="id_raza" value="<?= $id_raza ?>">
 
         <label>Nombre raza:</label><br>
-        <input type="text" name="nombre_raza" value="<?= $raza['nombre_raza'] ?>"><br><br>
+        <input type="text" name="nombre_raza" id="raza" value="<?= $raza['nombre_raza'] ?>" onblur="verificarRaza()"><br><br>
+        <span id="errorRaza" class="error"></span>
 
         <label>Especie:</label><br>
-        <select name="id_especie">
+        <select name="id_especie" id="especie" onblur="verificarEspecie()">
             <option value="">Seleccionar especie</option>
             <?php
             $sql = "SELECT id_especie, nombre_especie FROM especie";
@@ -77,6 +79,7 @@ if (isset($_GET['id_raza'])) {
             }
             ?>
         </select><br><br>
+        <span id="errorEspecie" class="error"></span>
         <input type="submit" name="actualizar_raza" value="Actualizar Raza">
     </form>
 </section>

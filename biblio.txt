@@ -1,4 +1,0 @@
-login:              https://uiverse.io/MikeAndrewDesigner/pink-duck-8
-boton:              https://uiverse.io/satyamchaudharydev/modern-sheep-10
-logut button:       https://uiverse.io/vinodjangid07/hard-panther-43
-eliminar:           https://uiverse.io/vinodjangid07/smart-emu-83

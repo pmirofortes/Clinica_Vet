@@ -38,27 +38,18 @@ create table raza (
     id_especie int NOT NULL
 );
 
-create table historial_medico (
-    id_historial int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    sexo_animal_historial enum("macho","hembra","hermafrodita") NOT NULL,
-    fecha_nac_historial DATE NOT NULL,
-    microchip_historial char(30) NULL,
-    vacunas_historial varchar(100) NULL,
-    tratamiento varchar(200) NULL,
-    id_animal int  
-);
-
 
 create table veterinario (
     dni_veterinario char(9) PRIMARY KEY NOT NULL,
     nombre_veterinario varchar(40) NOT NULL,
     apellidos_veterinario varchar(50) NOT NULL,
-    edad_veterinario int(2) NULL,
+    edad_veterinario date NULL,
     localidad_veterinario varchar(85) NULL,
     telefono_veterinario char (9) NULL,
     correo_veterinario varchar (35) NULL,
-    password_veterinario varchar (30) NOT NULL
+    password_veterinario varchar (10000) NOT NULL
 );
+
 
 alter table animal
 ADD CONSTRAINT idAnimal_dniDueno

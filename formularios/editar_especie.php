@@ -35,6 +35,7 @@ if (isset($_GET['id_especie'])) {
     <title>Editar especie</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
     <link rel="icon" href="../media/favicon.png" type="image/png">
     <style>
         /* Reset básico */
@@ -81,28 +82,30 @@ body {
         <div class="text">Logout</div>
     </a>
     <header>
-        <h1>Registro de Especie</h1>
+        <h1>Editar especie</h1>
     </header>
         <section class="form">
-            <form action="../procesos/create/create_especie.php" method="post">
+            <form action="../procesos/update/update_especie.php" method="post">
+                <input type="hidden" name="id_especie" value="<?= $especie['id_especie'] ?>">
                 <label for="nombre">Nombre especie:</label><br>
-                <input type="text" id="nombre" name="nombre" value="<?= $especie['nombre_especie'] ?>"><br><br>
-                
-                <label for="nombre_cientifico">Nombre científicio:</label><br>
-                <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="<?= $especie['nombre_cientifico_especie'] ?>"><br><br>
-                
-               
-<label for="clas">Clasificación:</label><br>
-<select name="clas" id="clas">
-    <option value="" disabled>Selecciona una especie</option>
-    <option value="mamifero" <?= $especie['clasif_especie'] == 'mamifero' ? 'selected' : '' ?>>mamifero</option>
-    <option value="pez" <?= $especie['clasif_especie'] == 'pez' ? 'selected' : '' ?>>pez</option>
-    <option value="invertebrado" <?= $especie['clasif_especie'] == 'invertebrado' ? 'selected' : '' ?>>invertebrado</option>
-    <option value="ave" <?= $especie['clasif_especie'] == 'ave' ? 'selected' : '' ?>>ave</option>
-    <option value="reptil" <?= $especie['clasif_especie'] == 'reptil' ? 'selected' : '' ?>>reptil</option>
-    <option value="amfibio" <?= $especie['clasif_especie'] == 'amfibio' ? 'selected' : '' ?>>amfibio</option>
-</select><br><br>
+                <input type="text" id="nombre" name="nombre" value="<?= $especie['nombre_especie'] ?>" onblur="validarNombreEspecie()"><br>
+                <span id="errorNombre" class="error"></span><br>
 
+                <label for="nombre_cientifico">Nombre científicio:</label><br>
+                <input type="text" id="nombre_cientifico" name="nombre_cientifico" value="<?= $especie['nombre_cientifico_especie'] ?>" onblur="validarNombreCientifico()"><br>
+                <span id="errorNombreCien" class="error"></span><br>
+
+                <label for="clas">Clasificación:</label><br>
+                <select name="clas" id="opcion" onblur="clasifEspecie()">
+                    <option value="" disabled>Selecciona una especie</option>
+                    <option value="mamifero" <?= $especie['clasif_especie'] == 'mamifero' ? 'selected' : '' ?>>mamifero</option>
+                    <option value="pez" <?= $especie['clasif_especie'] == 'pez' ? 'selected' : '' ?>>pez</option>
+                    <option value="invertebrado" <?= $especie['clasif_especie'] == 'invertebrado' ? 'selected' : '' ?>>invertebrado</option>
+                    <option value="ave" <?= $especie['clasif_especie'] == 'ave' ? 'selected' : '' ?>>ave</option>
+                    <option value="reptil" <?= $especie['clasif_especie'] == 'reptil' ? 'selected' : '' ?>>reptil</option>
+                    <option value="amfibio" <?= $especie['clasif_especie'] == 'amfibio' ? 'selected' : '' ?>>amfibio</option>
+                </select><br>
+                <span id="errorSelect" class="error"></span><br>
                 <input type="submit" value="Registrar Especie">
 
             </form> 

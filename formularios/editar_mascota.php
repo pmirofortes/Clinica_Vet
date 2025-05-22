@@ -31,7 +31,9 @@ if (isset($_GET['id_animal'])) {
     <meta charset="UTF-8">
     <title>Editar Mascota</title>
     <link rel="stylesheet" href="../front/forms.css">
+    <script src="../front/validaciones.js"></script>
     <script src="../front/menu.js"></script>
+    
 
 </head>
 <body>
@@ -61,56 +63,65 @@ if (isset($_GET['id_animal'])) {
 <header><h1>Editar Mascota</h1></header>
 <div class="layout">
 <section class="form">
-    <form method="post" action="../procesos/update/update_mascota.php">
-        <!-- Campo oculto para enviar el id_animal -->
-        <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
-        <label>Nombre:</label>
-        <input type="text" name="nombre" value="<?= $mascota['nombre_animal'] ?>"><br><br>
+<form method="post" action="../procesos/update/update_mascota.php">
+    <!-- Campo oculto para enviar el id_animal -->
+    <input type="hidden" name="id_animal" value="<?= $id_animal ?>">
 
-        <label>Fecha nacimiento:</label>
-        <input type="date" name="edad" value="<?= $mascota['edad_animal'] ?>"><br><br>
+    <label>Nombre:</label>
+    <input type="text" id="nombre" name="nombre" value="<?= $mascota['nombre_animal'] ?>" onblur="verificarNombre()">
+    <span id="errorNombre" class="error"></span><br><br>
 
-        <label>Peso:</label>
-        <input type="text" name="peso" value="<?= $mascota['peso_animal'] ?>"><br><br>
+    <label>Fecha nacimiento:</label>
+    <input type="date" id="fecha" name="edad" value="<?= $mascota['edad_animal'] ?>" onblur="verificarEdad()">
+    <span id="errorFecha" class="error"></span><br><br>
 
-        <label>Color:</label>
-        <input type="text" name="color" value="<?= $mascota['color_animal'] ?>"><br><br>
+    <label>Peso:</label>
+    <input type="text" id="peso" name="peso" value="<?= $mascota['peso_animal'] ?>" onblur="pesoAnimal()">
+    <span id="errorPeso" class="error"></span><br><br>
 
-        <label>DNI Dueño:</label>
-        <input type="text" name="dni_dueno" value="<?= $mascota['dni_dueno'] ?>"><br><br>
+    <label>Color:</label>
+    <input type="text" id="color" name="color" value="<?= $mascota['color_animal'] ?>" onblur="verificarColor()">
+    <span id="errorColor" class="error"></span><br><br>
 
-        <label>DNI Veterinario:</label>
-        <input type="text" name="dni_vet" value="<?= $mascota['dni_veterinario'] ?>"><br><br>
+    <label>DNI Dueño:</label>
+    <input type="text" id="dniDueno" name="dni_dueno" value="<?= $mascota['dni_dueno'] ?>" onblur="verificarDNIDueno()">
+    <span id="dniDuenoError" class="error"></span><br><br>
 
-        <label>Especie:</label>
-        <select name="especie">
-            <option value="">Seleccionar especie</option>
-            <?php
-            $sql = "SELECT id_especie, nombre_especie FROM especie";
-            $res = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $selected = ($mascota['id_especie'] == $row['id_especie']) ? 'selected' : '';
-                echo "<option value='{$row['id_especie']}' $selected>{$row['nombre_especie']}</option>";
-            }
-            ?>
-        </select><br><br>
+    <label>DNI Veterinario:</label>
+    <input type="text" id="dniVete" name="dni_vet" value="<?= $mascota['dni_veterinario'] ?>" onblur="verificarDNIVeterinario()">
+    <span id="dniVeteError" class="error"></span><br><br>
 
-        <label>Raza:</label>
-        <select name="raza">
-            <option value="">Seleccionar raza</option>
-            <?php
-            $sql = "SELECT id_raza, nombre_raza FROM raza";
-            $res = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($res)) {
-                $selected = ($mascota['id_raza'] == $row['id_raza']) ? 'selected' : '';
-                echo "<option value='{$row['id_raza']}' $selected>{$row['nombre_raza']}</option>";
-            }
-            ?>
-        </select><br><br>
+    <label>Especie:</label>
+    <select id="especie" name="especie" onblur="verificarEspecie()">
+        <option value="">Seleccionar especie</option>
+        <?php
+        $sql = "SELECT id_especie, nombre_especie FROM especie";
+        $res = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($res)) {
+            $selected = ($mascota['id_especie'] == $row['id_especie']) ? 'selected' : '';
+            echo "<option value='{$row['id_especie']}' $selected>{$row['nombre_especie']}</option>";
+        }
+        ?>
+    </select>
+    <span id="errorEspecie" class="error"></span><br><br>
 
-        <input type="submit" name="actualizar_mascota" value="Actualizar Mascota">
-    </form>
+    <label>Raza:</label>
+    <select id="raza" name="raza" onblur="verificarRaza()">
+        <option value="">Seleccionar raza</option>
+        <?php
+        $sql = "SELECT id_raza, nombre_raza FROM raza";
+        $res = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($res)) {
+            $selected = ($mascota['id_raza'] == $row['id_raza']) ? 'selected' : '';
+            echo "<option value='{$row['id_raza']}' $selected>{$row['nombre_raza']}</option>";
+        }
+        ?>
+    </select>
+    <span id="errorRaza" class="error"></span><br><br>
+
+    <input type="submit" name="actualizar_mascota" value="Actualizar Mascota">
+</form>
 </section>
 </div>
 </main>

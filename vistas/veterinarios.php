@@ -23,7 +23,9 @@ include('../servicios/conexion.php');
     <style>
 
     h1{
-        margin-left: 15%;
+        margin-top: 2%;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
         /* Estilos generales del formulario */
@@ -138,7 +140,11 @@ input[type="text"]::placeholder {
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>DNI</th>
-                <th>Edad</th>              <th>Acciones</th>
+                <th>Edad</th>            
+                <th>Localidad</th>
+                <th>Teléfono</th>
+                <th>Correo</th>  
+                <th>Acciones</th>
             </tr>
 
             <?php

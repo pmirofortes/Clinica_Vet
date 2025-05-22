@@ -26,6 +26,8 @@ if (isset($_GET['dni_veterinario'])) {
     <title>Editar usuario</title>
     <link rel="stylesheet" href="../front/forms.css">
     <script src="../front/menu.js"></script>
+    <script src="../front/validaciones.js"></script>
+
    
 </head>
 <body>
@@ -55,52 +57,50 @@ if (isset($_GET['dni_veterinario'])) {
         
         <div class="text">Logout</div>
     </a>
+<header><h1>Editar Veterinario</h1></header>
+<section class= "form">
+<form action="../procesos/update/update_usuario.php" method="POST">
+    <label for="DNI">DNI</label>
+    <input type="text" required name="DNI" id="dni" value="<?php echo $veterinario['dni_veterinario']; ?>" onblur="verificarDNI()">
+    
+    <span id="dniError" class="error"></span>
+    <input type="hidden" required name="DNI_original" id="DNI_original" value="<?php echo $veterinario['dni_veterinario']; ?>">
 
-    <form action="../procesos/update/update_usuario.php" method="POST">
-        
-            <input type="text" required="" name="DNI" id="DNI" value="<?php echo $veterinario['dni_veterinario']; ?>">
-            <label for="DNI">DNI</label>
-            <input type="hidden" required="" name="DNI_original" id="DNI_original" value="<?php echo $veterinario['dni_veterinario']; ?>">
-        
+    <label for="nombre">Nombre</label>
+    <input type="text" required name="nombre" id="nombre" value="<?php echo $veterinario['nombre_veterinario']; ?>" onblur="verificarNombre()">
+    <span id="errorNombre" class="error"></span>
 
-        
-            <input type="text" required="" name="nombre" id="nombre" value="<?php echo $veterinario['nombre_veterinario']; ?>">
-            <label for="nombre">Nombre</label>
-        
-        
-            <input type="text" required="" name="apellidos" id="apellidos" value="<?php echo $veterinario['apellidos_veterinario']; ?>">
-            <label for="apellidos">Apellidos</label>
-        
-        
-            <input type="text" required="" name="edad" id="edad" value="<?php echo $veterinario['edad_veterinario']; ?>">
-            <label for="edad">Edad</label>
-        
-        
-            <input type="text" required="" name="localidad" id="localidad" value="<?php echo $veterinario['localidad_veterinario']; ?>">
-            <label for="Localidad">Localidad</label>
-        
-        
-            <input type="telf" required="" name="telefono" id="telefono" value="<?php echo $veterinario['telefono_veterinario']; ?>">
-            <label for="telefono">Teléfono</label>
-        
-        
-            <input type="mail" required="" name="mail" id="mail" value="<?php echo $veterinario['correo_veterinario']; ?>">
-            <label for="mail">Correo</label>
-        
-        
-            <input type="password" name="password_veterinario" id="password_veterinario" placeholder="Nueva contraseña">
-            <label for="password_veterinario">Nueva Contraseña</label>
-        
-        <button type="submit" class="form_button">
-            <span class="button__text">Actualizar</span>
-            <span class="button__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
-                    <line y2="19" y1="5" x2="12" x1="12"></line>
-                    <line y2="12" y1="12" x2="19" x1="5"></line>
-                </svg>
-            </span>
-        </button>
-    </form>
+    <label for="apellidos">Apellidos</label>
+    <input type="text" required name="apellidos" id="apellidos" value="<?php echo $veterinario['apellidos_veterinario']; ?>" onblur="verificarApellidos()">
+    <span id="errorApellidos" class="error"></span>
+
+    <label for="edad">Edad</label>
+    <input type="date" required name="edad" id="fecha" value="<?php echo $veterinario['edad_veterinario']; ?>" onblur="verificarEdad()">
+    <span id="errorFecha" class="error"></span>
+
+    <label for="Localidad">Localidad</label>
+    <input type="text" required name="localidad" id="localidad" value="<?php echo $veterinario['localidad_veterinario']; ?>" onblur="verificarLocalidad()">
+    <span id="errorLocalidad" class="error"></span>
+
+    <label for="telefono">Teléfono</label>
+    <input type="text" required name="telefono" id="telefono" value="<?php echo $veterinario['telefono_veterinario']; ?>" onblur="verificarTelefono()">
+    
+    <span id="errorTelefono" class="error"></span>
+
+    <label for="mail">Correo</label>
+    <input type="text" required name="mail" id="email" value="<?php echo $veterinario['correo_veterinario']; ?>" onblur="verificarEmail()">
+    
+    <span id="errorMail" class="error"></span>
+
+    <label for="password_veterinario">Nueva Contraseña</label>
+    <input type="password" name="password_veterinario" id="password" placeholder="Nueva contraseña" onblur="verificarPasswd()">
+    
+    <span id="errorPassword" class="error"></span>
+
+    <input type="submit" name="actualizar_usuario" value="Actualizar Usuario">
+
+</form>
+</section>
 </main>
 </body>
 </html>
